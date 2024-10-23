@@ -16,5 +16,17 @@
             android:id="@+id/nav_property"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_property" />
+        <item
+            android:id="@+id/nav_contract"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_contract" />
+        <item
+            android:id="@+id/nav_tenant"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_tenant" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_logout" />
     </group>
 </menu>

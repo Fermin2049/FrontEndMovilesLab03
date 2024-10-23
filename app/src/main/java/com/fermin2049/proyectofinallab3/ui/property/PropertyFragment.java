@@ -23,8 +23,7 @@ public class PropertyFragment extends Fragment {
         binding = FragmentPropertyBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
-        propertyViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
         return root;
     }
 

@@ -1,19 +1,47 @@
 package com.fermin2049.proyectofinallab3.ui.profile;
 
+import android.app.Application;
+import android.content.Context;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import com.fermin2049.proyectofinallab3.api.RetrofitClient;
+import com.fermin2049.proyectofinallab3.api.RetrofitClient.InmobliariaService;
+import com.fermin2049.proyectofinallab3.models.Property;
 
-public class ProfileViewModel extends ViewModel {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-    private final MutableLiveData<String> mText;
+public class ProfileViewModel extends AndroidViewModel {
 
-    public ProfileViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+    private final MutableLiveData<Property> propietarioLiveData;
+
+    public ProfileViewModel(Application application) {
+        super(application);
+        propietarioLiveData = new MutableLiveData<>();
+        fetchPropietarioDetails(application.getApplicationContext());
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<Property> getPropietario() {
+        return propietarioLiveData;
+    }
+
+    private void fetchPropietarioDetails(Context context) {
+        InmobliariaService service = RetrofitClient.getInmobiliariaService(context);
+        Call<Property> call = service.getMyDetails();
+        call.enqueue(new Callback<Property>() {
+            @Override
+            public void onResponse(Call<Property> call, Response<Property> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    propietarioLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Property> call, Throwable t) {
+                // Handle failure
+            }
+        });
     }
 }

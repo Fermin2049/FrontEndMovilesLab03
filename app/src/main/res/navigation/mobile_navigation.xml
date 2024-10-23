@@ -22,4 +22,19 @@
         android:name="com.fermin2049.proyectofinallab3.ui.property.PropertyFragment"
         android:label="@string/menu_property"
         tools:layout="@layout/fragment_property" />
+    <fragment
+        android:id="@+id/nav_contract"
+        android:name="com.fermin2049.proyectofinallab3.ui.contract.ContractFragment"
+        android:label="@string/menu_contract"
+        tools:layout="@layout/fragment_contract" />
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.fermin2049.proyectofinallab3.ui.logout.LogoutFragment"
+        android:label="@string/menu_logout"
+        tools:layout="@layout/fragment_logout" />
+    <fragment
+        android:id="@+id/nav_tenant"
+        android:name="com.fermin2049.proyectofinallab3.ui.tenant.TenantFragment"
+        android:label="@string/menu_tenant"
+        tools:layout="@layout/fragment_tenant" />
 </navigation>
