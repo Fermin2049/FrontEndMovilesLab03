@@ -2,7 +2,7 @@ package com.fermin2049.proyectofinallab3.models;
 
 import java.util.Date;
 
-public class Pay {
+public class Pago {
     private int idPago;
     private int idContrato;
     private Contract contrato;
@@ -10,7 +10,7 @@ public class Pay {
     private Date fechaPago;
     private double importe;
 
-    public Pay(int idPago, int idContrato, Contract contrato, int numeroPago, Date fechaPago, double importe) {
+    public Pago(int idPago, int idContrato, Contract contrato, int numeroPago, Date fechaPago, double importe) {
         this.idPago = idPago;
         this.idContrato = idContrato;
         this.contrato = contrato;

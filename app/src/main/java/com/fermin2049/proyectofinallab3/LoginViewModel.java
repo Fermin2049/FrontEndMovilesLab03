@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.fermin2049.proyectofinallab3.api.RetrofitClient;
+import com.fermin2049.proyectofinallab3.models.LoginResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,23 +27,16 @@ public class LoginViewModel extends AndroidViewModel {
 
     public void llamarLogin(String email, String password) {
         RetrofitClient.InmobliariaService api = RetrofitClient.getInmobiliariaService(getApplication());
-        Call<String> call = api.login(email, password);
+        Call<LoginResponse> call = api.login(email, password);
         Log.d("LoginViewModel", "Calling API with email: " + email);
-        call.enqueue(new Callback<String>() {
+        call.enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                if (response.isSuccessful()) {
-                    assert response.body() != null;
-                    Log.d("LoginViewModel", "Login successful: " + response.body());
-                    try {
-                        JSONObject jsonObject = new JSONObject(response.body());
-                        String token = jsonObject.getString("token");
-                        saveToken(token);
-                        Toast.makeText(getApplication(), "Login exitoso", Toast.LENGTH_SHORT).show();
-                        startMainActivity();
-                    } catch (JSONException e) {
-                        Log.d("LoginViewModel", "JSON parsing error: " + e.getMessage());
-                    }
+            public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    LoginResponse loginResponse = response.body();
+                    Log.d("LoginViewModel", "Login successful: " + loginResponse.getToken());
+                    saveToken(loginResponse.getToken());
+                    startMainActivity();
                 } else {
                     Log.d("LoginViewModel", "Login failed: " + response.code() + " - " + response.message());
                     Toast.makeText(getApplication(), "Datos incorrectos", Toast.LENGTH_SHORT).show();
@@ -50,7 +44,7 @@ public class LoginViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(@NonNull Call<String> call, @NonNull Throwable throwable) {
+            public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable throwable) {
                 Log.d("LoginViewModel", "API call failed: " + throwable.getMessage());
                 Toast.makeText(getApplication(), "Error de servidor", Toast.LENGTH_SHORT).show();
             }
