@@ -5,10 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.contract.ContractFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewContratos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Contrato"
-        android:textSize="52dp"/>
+        android:layout_height="match_parent" />
 
 </FrameLayout>

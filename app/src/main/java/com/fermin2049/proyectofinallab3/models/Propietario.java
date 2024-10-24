@@ -1,6 +1,8 @@
 package com.fermin2049.proyectofinallab3.models;
 
-public class Property {
+import java.util.List;
+
+public class Propietario {
     private int idPropietario;
     private String dni;
     private String apellido;
@@ -9,8 +11,9 @@ public class Property {
     private String email;
     private String password;
     private String fotoPerfil;
+    private List<Inmueble> inmuebles;
 
-    public Property(int idPropietario, String dni, String apellido, String nombre, String telefono, String email, String password, String fotoPerfil) {
+    public Propietario(int idPropietario, String dni, String apellido, String nombre, String telefono, String email, String password, String fotoPerfil, List<Inmueble> inmuebles) {
         this.idPropietario = idPropietario;
         this.dni = dni;
         this.apellido = apellido;
@@ -19,6 +22,7 @@ public class Property {
         this.email = email;
         this.password = password;
         this.fotoPerfil = fotoPerfil;
+        this.inmuebles = inmuebles;
     }
 
     public int getIdPropietario() {
@@ -83,5 +87,13 @@ public class Property {
 
     public void setFotoPerfil(String fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
+    }
+
+    public List<Inmueble> getInmuebles() {
+        return inmuebles;
+    }
+
+    public void setInmuebles(List<Inmueble> inmuebles) {
+        this.inmuebles = inmuebles;
     }
 }

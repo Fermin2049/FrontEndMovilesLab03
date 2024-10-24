@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.fermin2049.proyectofinallab3.api.RetrofitClient;
 import com.fermin2049.proyectofinallab3.api.RetrofitClient.InmobliariaService;
-import com.fermin2049.proyectofinallab3.models.Property;
+import com.fermin2049.proyectofinallab3.models.Propietario;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,7 +15,7 @@ import retrofit2.Response;
 
 public class ProfileViewModel extends AndroidViewModel {
 
-    private final MutableLiveData<Property> propietarioLiveData;
+    private final MutableLiveData<Propietario> propietarioLiveData;
 
     public ProfileViewModel(Application application) {
         super(application);
@@ -23,23 +23,23 @@ public class ProfileViewModel extends AndroidViewModel {
         fetchPropietarioDetails(application.getApplicationContext());
     }
 
-    public LiveData<Property> getPropietario() {
+    public LiveData<Propietario> getPropietario() {
         return propietarioLiveData;
     }
 
     private void fetchPropietarioDetails(Context context) {
         InmobliariaService service = RetrofitClient.getInmobiliariaService(context);
-        Call<Property> call = service.getMyDetails();
-        call.enqueue(new Callback<Property>() {
+        Call<Propietario> call = service.getMyDetails();
+        call.enqueue(new Callback<Propietario>() {
             @Override
-            public void onResponse(Call<Property> call, Response<Property> response) {
+            public void onResponse(Call<Propietario> call, Response<Propietario> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     propietarioLiveData.setValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<Property> call, Throwable t) {
+            public void onFailure(Call<Propietario> call, Throwable t) {
                 // Handle failure
             }
         });

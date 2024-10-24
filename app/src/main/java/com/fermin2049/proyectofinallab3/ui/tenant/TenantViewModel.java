@@ -1,7 +1,48 @@
 package com.fermin2049.proyectofinallab3.ui.tenant;
 
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
+import android.content.Context;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import com.fermin2049.proyectofinallab3.api.RetrofitClient;
+import com.fermin2049.proyectofinallab3.api.RetrofitClient.InmobliariaService;
+import com.fermin2049.proyectofinallab3.models.Inquilino;
 
-public class TenantViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
+import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class TenantViewModel extends AndroidViewModel {
+
+    private final MutableLiveData<List<Inquilino>> tenantLiveData;
+
+    public TenantViewModel(Application application) {
+        super(application);
+        tenantLiveData = new MutableLiveData<>();
+        fetchInquilinos(application.getApplicationContext());
+    }
+
+    public LiveData<List<Inquilino>> getInquilinos() {
+        return tenantLiveData;
+    }
+
+    private void fetchInquilinos(Context context) {
+        InmobliariaService service = RetrofitClient.getInmobiliariaService(context);
+        Call<List<Inquilino>> call = service.getTenant();
+        call.enqueue(new Callback<List<Inquilino>>() {
+            @Override
+            public void onResponse(Call<List<Inquilino>> call, Response<List<Inquilino>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    tenantLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Inquilino>> call, Throwable t) {
+                // Handle failure
+            }
+        });
+    }
 }

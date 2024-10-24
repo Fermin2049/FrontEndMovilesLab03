@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.fermin2049.proyectofinallab3.databinding.FragmentProfileBinding;
-import com.fermin2049.proyectofinallab3.models.Property;
 
 public class ProfileFragment extends Fragment {
 
@@ -34,14 +33,14 @@ public class ProfileFragment extends Fragment {
         final TextView tvEmail = binding.tvEmail;
         final ImageView ivFotoPerfil = binding.ivFotoPerfil;
 
-        profileViewModel.getPropietario().observe(getViewLifecycleOwner(), propietario -> {
-            if (propietario != null) {
-                tvNombre.setText(propietario.getNombre());
-                tvApellido.setText(propietario.getApellido());
-                tvDni.setText(propietario.getDni());
-                tvTelefono.setText(propietario.getTelefono());
-                tvEmail.setText(propietario.getEmail());
-                Glide.with(this).load(propietario.getFotoPerfil()).into(ivFotoPerfil);
+        profileViewModel.getPropietario().observe(getViewLifecycleOwner(), profile -> {
+            if (profile != null) {
+                tvNombre.setText(profile.getNombre());
+                tvApellido.setText(profile.getApellido());
+                tvDni.setText(profile.getDni());
+                tvTelefono.setText(profile.getTelefono());
+                tvEmail.setText(profile.getEmail());
+                Glide.with(this).load(profile.getFotoPerfil()).into(ivFotoPerfil);
             }
         });
 

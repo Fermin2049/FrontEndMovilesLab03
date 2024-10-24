@@ -2,8 +2,11 @@ package com.fermin2049.proyectofinallab3.api;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
-import com.fermin2049.proyectofinallab3.models.Property;
+import com.fermin2049.proyectofinallab3.models.Contract;
+import com.fermin2049.proyectofinallab3.models.Propietario;
+import com.fermin2049.proyectofinallab3.models.Inquilino;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -21,9 +24,11 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 import java.io.IOException;
+import java.util.List;
 
 public class RetrofitClient {
     private static final String URL_BASE = "http://192.168.1.2:5157/api/";
+    private static final String TAG = "RetrofitClient";
     private static Retrofit retrofit = null;
 
     public static InmobliariaService getInmobiliariaService(Context context) {
@@ -35,8 +40,10 @@ public class RetrofitClient {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
                             Request original = chain.request();
+                            String token = getToken(context);
+                            Log.d(TAG, "Token: " + token);
                             Request.Builder requestBuilder = original.newBuilder()
-                                    .header("Authorization", "Bearer " + getToken(context));
+                                    .header("Authorization", "Bearer " + token);
                             Request request = requestBuilder.build();
                             return chain.proceed(request);
                         }
@@ -55,16 +62,24 @@ public class RetrofitClient {
 
     private static String getToken(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
-        return sharedPreferences.getString("jwt_token", "");
+        String token = sharedPreferences.getString("jwt_token", "");
+        Log.d(TAG, "Retrieved token: " + token);
+        return token;
     }
 
-    //Creamos interfas
+    // Interfaz de servicios
     public interface InmobliariaService {
         @FormUrlEncoded
         @POST("Propietarios/login")
         Call<String> login(@Field("Usuario") String usuario, @Field("Clave") String clave);
 
         @GET("Propietarios/me")
-        Call<Property> getMyDetails();
+        Call<Propietario> getMyDetails();
+
+        @GET("Inquilinos")
+        Call<List<Inquilino>> getTenant();
+
+        @GET("Contratos")
+        Call<List<Contract>> getContratos();
     }
 }

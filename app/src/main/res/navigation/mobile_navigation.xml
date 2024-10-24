@@ -34,7 +34,12 @@
         tools:layout="@layout/fragment_logout" />
     <fragment
         android:id="@+id/nav_tenant"
-        android:name="com.fermin2049.proyectofinallab3.ui.tenant.TenantFragment"
+        android:name="com.fermin2049.proyectofinallab3.ui.inquilino.TenantFragment"
         android:label="@string/menu_tenant"
         tools:layout="@layout/fragment_tenant" />
+    <fragment
+        android:id="@+id/nav_pay"
+        android:name="com.fermin2049.proyectofinallab3.ui.pay.PayFragment"
+        android:label="fragment_pay"
+        tools:layout="@layout/fragment_pay" />
 </navigation>
