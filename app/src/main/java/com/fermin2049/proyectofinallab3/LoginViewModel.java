@@ -51,6 +51,11 @@ public class LoginViewModel extends AndroidViewModel {
         });
     }
 
+    public void llamarRegistro(String username, String email, String password) {
+        // Lógica para registrar al usuario (similar a llamarLogin)
+        // Puedes crear una llamada a tu API de registro aquí
+    }
+
     private void saveToken(String token) {
         SharedPreferences sharedPreferences = getApplication().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
