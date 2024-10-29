@@ -2,10 +2,8 @@ package com.fermin2049.proyectofinallab3;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,8 +35,8 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // Configurar animaciones del ViewFlipper
-        viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in_left));
-        viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out_right));
+        viewFlipper.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in_bottom));
+        viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out_top));
 
         // Manejar el botón para mostrar la vista de registro
         btnToSignup.setOnClickListener(v -> viewFlipper.setDisplayedChild(0));
@@ -48,13 +46,13 @@ public class LoginActivity extends AppCompatActivity {
 
         // Manejar el login
         binding.btnLogin.setOnClickListener(v -> {
-            String username = binding.etLoginEmail.getText().toString();
+            String email = binding.etLoginEmail.getText().toString();
             String password = binding.etLoginPassword.getText().toString();
-            Log.d("LoginActivity", "Attempting login with username: " + username);
-            lvm.llamarLogin(username, password);
+            Log.d("LoginActivity", "Attempting login with email: " + email);
+            lvm.llamarLogin(email, password);
         });
 
-        // Configurar el botón de registro (si es necesario)
+        // Configurar el botón de registro
         binding.btnSignup.setOnClickListener(v -> {
             String username = binding.etSignupUsername.getText().toString();
             String email = binding.etSignupEmail.getText().toString();

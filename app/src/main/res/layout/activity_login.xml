@@ -6,14 +6,12 @@
     android:background="@drawable/login_background"
     tools:context=".LoginActivity">
 
-    <!-- ViewFlipper para alternar entre login y registro -->
     <ViewFlipper
         android:id="@+id/viewFlipper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
 
-        <!-- Vista de registro -->
         <LinearLayout
             android:id="@+id/signupView"
             android:layout_width="match_parent"
@@ -54,17 +52,16 @@
                 android:inputType="textPassword"
                 android:background="@drawable/rounded_input"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSignup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Registrarse"
                 android:fontFamily="@font/jost_regular"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/black"
                 android:background="@drawable/rounded_button"/>
         </LinearLayout>
 
-        <!-- Vista de login -->
         <LinearLayout
             android:id="@+id/loginView"
             android:layout_width="match_parent"
@@ -97,7 +94,7 @@
                 android:inputType="textPassword"
                 android:background="@drawable/rounded_input"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -117,7 +114,6 @@
         </LinearLayout>
     </ViewFlipper>
 
-    <!-- Botones de alternancia -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -126,7 +122,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="32dp">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnToSignup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -135,7 +131,7 @@
             android:textColor="#FFFFFF"
             android:background="@drawable/rounded_button"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnToLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
