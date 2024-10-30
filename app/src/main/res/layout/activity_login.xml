@@ -8,149 +8,289 @@
     app:layoutDescription="@xml/activity_login_scene"
     tools:context=".LoginActivity">
 
-    <!-- Guideline para posicionar loginView debajo de btnRegistrar -->
+    <!-- Guideline para ajustar la posición de signupView -->
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/guidelineTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="0dp"/>
+        app:layout_constraintGuide_begin="16dp" />
 
-    <!-- Vista de registro -->
-    <LinearLayout
+    <!-- Vista de registro usando ConstraintLayout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/signupView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/guidelineTop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
+        <!-- Imagen para el logo -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/logoImage"
+            android:layout_width="244dp"
+            android:layout_height="182dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/ic_logo_placeholder"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:shapeAppearanceOverlay="@style/CircularImageView" />
+
+        <!-- Botón de registro -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnRegistrar"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="38dp"
+            android:layout_marginBottom="26dp"
+            android:background="@android:color/transparent"
             android:text="Registrarse"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"
             android:textSize="33sp"
-            android:background="@android:color/transparent" />
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/logoImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- EditText de registro -->
+        <!-- Campos de entrada para el registro -->
         <EditText
             android:id="@+id/etSignupDNI"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="52dp"
-            android:layout_marginBottom="12dp"
             android:background="@drawable/rounded_input"
+            android:drawableStart="@drawable/fa_icon_dni"
             android:hint="DNI"
-            android:inputType="number" />
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:inputType="number"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            app:layout_constraintTop_toBottomOf="@id/btnRegistrar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
             android:id="@+id/etSignupApellido"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="52dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_input"
+            android:drawableStart="@drawable/fa_icon_dni"
             android:hint="Apellido"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            app:layout_constraintTop_toBottomOf="@id/etSignupDNI"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
             android:id="@+id/etSignupNombre"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="52dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_input"
+            android:drawableStart="@drawable/fa_icon_dni"
             android:hint="Nombre"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            app:layout_constraintTop_toBottomOf="@id/etSignupApellido"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
             android:id="@+id/etSignupTelefono"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="52dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_input"
+            android:drawableStart="@drawable/fa_icon_telefono"
             android:hint="Teléfono"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            app:layout_constraintTop_toBottomOf="@id/etSignupNombre"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
             android:id="@+id/etSignupEmail"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="52dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_input"
+            android:drawableStart="@drawable/fa_icon_email"
             android:hint="Correo Electrónico"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            app:layout_constraintTop_toBottomOf="@id/etSignupTelefono"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <EditText
             android:id="@+id/etSignupPassword"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="52dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_input"
+            android:drawableStart="@drawable/fa_icon_password"
             android:hint="Clave"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            app:layout_constraintTop_toBottomOf="@id/etSignupEmail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSignup"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_button"
             android:text="Registrarse"
-            android:textColor="#FFFFFF" />
-    </LinearLayout>
+            android:textColor="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/etSignupPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Vista de inicio de sesión -->
-    <LinearLayout
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Vista de inicio de sesión usando ConstraintLayout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loginView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_ingresar"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="180dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegistrar">
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="814dp">
 
+        <!-- Botón para alternar a registro -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnToggleLogin"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="36dp"
             android:background="@android:color/transparent"
             android:text="Ingresar"
             android:textColor="@color/black"
-            android:textSize="33dp" />
+            android:textSize="33dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Campo de correo electrónico -->
         <EditText
             android:id="@+id/etLoginEmail"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginBottom="12dp"
             android:background="@drawable/rounded_input"
+            android:drawableStart="@drawable/fa_icon_email"
             android:hint="Correo Electrónico"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnToggleLogin" />
 
+        <!-- Campo de contraseña -->
         <EditText
             android:id="@+id/etLoginPassword"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginBottom="12dp"
             android:background="@drawable/rounded_input"
+            android:drawableStart="@drawable/fa_icon_password"
             android:hint="Clave"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etLoginEmail" />
 
+        <!-- Botón de inicio de sesión -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/rounded_button"
             android:text="Ingresar"
-            android:textColor="#FFFFFF" />
-    </LinearLayout>
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etLoginPassword" />
+
+        <!-- Botones para redes sociales -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLoginGoogle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_button"
+            android:text="Ingresar con Google"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnLogin" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLoginFacebook"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_button"
+            android:text="Ingresar con Facebook"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnLoginGoogle" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLoginInstagram"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_button"
+            android:text="Ingresar con Instagram"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnLoginFacebook" />
+
+        <!-- Opción de "Olvidaste tu contraseña" -->
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="¿Olvidaste tu contraseña?"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnLoginInstagram" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
