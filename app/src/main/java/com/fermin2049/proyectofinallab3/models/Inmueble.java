@@ -13,8 +13,9 @@ public class Inmueble {
     private int idPropietario;
     private Propietario propietario;
     private List<Object> contratos;
+    private String imagen;
 
-    public Inmueble(int idInmueble, String direccion, String uso, String tipo, int ambientes, double precio, String estado, int idPropietario, Propietario propietario, List<Object> contratos) {
+    public Inmueble(int idInmueble, String direccion, String uso, String tipo, int ambientes, double precio, String estado, int idPropietario, Propietario propietario, List<Object> contratos, String imagen) {
         this.idInmueble = idInmueble;
         this.direccion = direccion;
         this.uso = uso;
@@ -25,6 +26,7 @@ public class Inmueble {
         this.idPropietario = idPropietario;
         this.propietario = propietario;
         this.contratos = contratos;
+        this.imagen = imagen;
     }
 
     public int getIdInmueble() {
@@ -105,5 +107,13 @@ public class Inmueble {
 
     public void setContratos(List<Object> contratos) {
         this.contratos = contratos;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

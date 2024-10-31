@@ -31,13 +31,11 @@ public class ContractFragment extends Fragment {
 
         contractViewModel = new ViewModelProvider(this).get(ContractViewModel.class);
         contractViewModel.getContratos().observe(getViewLifecycleOwner(), contratos -> {
-            if (contratos != null) {
-                Log.d(TAG, "Contracts data updated. Number of contracts: " + contratos.size());
-                adapter.setContratos(contratos);
-            } else {
-                Log.d(TAG, "Contracts data is null.");
-            }
+            adapter.setContratos(contratos);
         });
+
+        // Obtener los contratos por propietario (ejemplo con propietarioId = 1)
+        contractViewModel.fetchContratosByPropietarioId(1);
 
         return root;
     }

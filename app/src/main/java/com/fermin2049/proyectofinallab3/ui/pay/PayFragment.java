@@ -5,12 +5,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.fermin2049.proyectofinallab3.R;
 import com.fermin2049.proyectofinallab3.models.PagoAdapter;
 
@@ -23,8 +25,6 @@ public class PayFragment extends Fragment {
     public static PayFragment newInstance() {
         return new PayFragment();
     }
-
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -42,13 +42,10 @@ public class PayFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(PayViewModel.class);
         mViewModel.getPagos().observe(getViewLifecycleOwner(), pagos -> {
-            if (pagos != null) {
-                adapter.setPagos(pagos);
-            } else {
-                // Log or handle the case where pagos is null
-                Log.e("PayFragment", "Pagos data is null");
-            }
+            adapter.setPagos(pagos);
         });
-    }
 
+        // Obtener los pagos por propietario (ejemplo con propietarioId = 1)
+        mViewModel.fetchPagosByPropietarioId(1);
+    }
 }

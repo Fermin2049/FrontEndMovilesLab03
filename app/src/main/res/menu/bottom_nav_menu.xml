@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/menu_home" />
+    <item
+        android:id="@+id/nav_profile"
+        app:iconTint="@null"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/menu_profile" />
+    <item
+        android:id="@+id/nav_property"
+        android:icon="@drawable/ic_property"
+        app:iconTint="@null"
+        android:title="@string/menu_property" />
+    <item
+        android:id="@+id/nav_contract"
+        app:iconTint="@null"
+        android:icon="@drawable/ic_contract"
+        android:title="@string/menu_contract" />
+    <item
+        android:id="@+id/nav_tenant"
+        app:iconTint="@null"
+        android:icon="@drawable/ic_tenant"
+        android:title="@string/menu_tenant" />
+    <item
+        android:id="@+id/nav_pay"
+        app:iconTint="@null"
+        android:icon="@drawable/ic_pay"
+        android:title="@string/menu_pay" />
+    <item
+        android:id="@+id/nav_logout"
+        app:iconTint="@null"
+        android:icon="@drawable/ic_logout"
+        android:title="@string/menu_logout" />
+</menu>

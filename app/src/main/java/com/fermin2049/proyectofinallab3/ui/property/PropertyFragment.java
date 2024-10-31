@@ -4,25 +4,43 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import com.fermin2049.proyectofinallab3.databinding.FragmentPropertyBinding;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.fermin2049.proyectofinallab3.databinding.FragmentPropertyBinding;
+import com.fermin2049.proyectofinallab3.models.InmuebleAdapter;
+
+import java.util.ArrayList;
 
 public class PropertyFragment extends Fragment {
 
     private FragmentPropertyBinding binding;
+    private PropertyViewModel propertyViewModel;
+    private InmuebleAdapter inmuebleAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        PropertyViewModel propertyViewModel =
-                new ViewModelProvider(this).get(PropertyViewModel.class);
+        propertyViewModel = new ViewModelProvider(this).get(PropertyViewModel.class);
 
         binding = FragmentPropertyBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        // Configurar el RecyclerView
+        binding.recyclerViewInmuebles.setLayoutManager(new LinearLayoutManager(getContext()));
+        inmuebleAdapter = new InmuebleAdapter(new ArrayList<>());
+        binding.recyclerViewInmuebles.setAdapter(inmuebleAdapter);
+
+        // Observar los datos de inmuebles
+        propertyViewModel.getInmuebles().observe(getViewLifecycleOwner(), inmuebles -> {
+            inmuebleAdapter.setInmuebles(inmuebles);
+            inmuebleAdapter.notifyDataSetChanged();
+        });
+
+        // Obtener los inmuebles por propietario (ejemplo con propietarioId = 1)
+        propertyViewModel.fetchInmueblesByPropietarioId(1);
 
         return root;
     }

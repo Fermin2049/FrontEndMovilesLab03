@@ -1,61 +1,74 @@
 package com.fermin2049.proyectofinallab3;
 
 import android.os.Bundle;
-import android.view.View;
-import android.view.Menu;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
-import com.fermin2049.proyectofinallab3.databinding.ActivityMainBinding;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        ViewPager2 viewPager = findViewById(R.id.view_pager);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(this);
+        viewPager.setAdapter(adapter);
 
-        setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null)
-                        .setAnchorView(R.id.fab).show();
-            }
-        });
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        new TabLayoutMediator(tabLayout, viewPager,
+                (tab, position) -> {
+                    switch (position) {
+                        case 0:
+                            tab.setText(R.string.menu_home);
+                            tab.setIcon(R.drawable.ic_home);
+                            break;
+                        case 1:
+                            tab.setText(R.string.menu_profile);
+                            tab.setIcon(R.drawable.ic_profile);
+                            break;
+                        case 2:
+                            tab.setText(R.string.menu_property);
+                            tab.setIcon(R.drawable.ic_property);
+                            break;
+                        case 3:
+                            tab.setText(R.string.menu_contract);
+                            tab.setIcon(R.drawable.ic_contract);
+                            break;
+                        case 4:
+                            tab.setText(R.string.menu_tenant);
+                            tab.setIcon(R.drawable.ic_tenant);
+                            break;
+                        case 5:
+                            tab.setText(R.string.menu_pay);
+                            tab.setIcon(R.drawable.ic_pay);
+                            break;
+                        case 6:
+                            tab.setText(R.string.menu_logout);
+                            tab.setIcon(R.drawable.ic_logout);
+                            break;
+                    }
+                }).attach();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_profile, R.id.nav_property
-        ,R.id.nav_contract,R.id.nav_tenant,R.id.nav_logout,R.id.nav_pay)
-                .setOpenableLayout(drawer)
+                R.id.nav_home, R.id.nav_profile, R.id.nav_property,
+                R.id.nav_contract, R.id.nav_tenant, R.id.nav_logout, R.id.nav_pay)
+                .setOpenableLayout(findViewById(R.id.drawer_layout))
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
     }
 
     @Override

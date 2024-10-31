@@ -22,16 +22,15 @@ public class ContractViewModel extends AndroidViewModel {
     public ContractViewModel(Application application) {
         super(application);
         contratosLiveData = new MutableLiveData<>();
-        fetchContratos(application.getApplicationContext());
     }
 
     public LiveData<List<Contract>> getContratos() {
         return contratosLiveData;
     }
 
-    private void fetchContratos(Context context) {
-        InmobliariaService service = RetrofitClient.getInmobiliariaService(context);
-        Call<List<Contract>> call = service.getContratos();
+    public void fetchContratosByPropietarioId(int propietarioId) {
+        InmobliariaService service = RetrofitClient.getInmobiliariaService(getApplication());
+        Call<List<Contract>> call = service.getContratosByPropietarioId(propietarioId);
         call.enqueue(new Callback<List<Contract>>() {
             @Override
             public void onResponse(Call<List<Contract>> call, Response<List<Contract>> response) {

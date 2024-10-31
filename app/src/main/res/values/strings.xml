@@ -9,7 +9,7 @@
 
     <string name="menu_home">Incio</string>
     <string name="menu_profile">Perfil</string>
-    <string name="menu_property">Propitario</string>
+    <string name="menu_property">Inmueble</string>
     <string name="menu_logout">Logout</string>
     <string name="menu_contract">Contrato</string>
     <string name="menu_tenant">Inquilino</string>

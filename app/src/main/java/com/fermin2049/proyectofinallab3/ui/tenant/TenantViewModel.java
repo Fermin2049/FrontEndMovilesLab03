@@ -21,16 +21,15 @@ public class TenantViewModel extends AndroidViewModel {
     public TenantViewModel(Application application) {
         super(application);
         tenantLiveData = new MutableLiveData<>();
-        fetchInquilinos(application.getApplicationContext());
     }
 
     public LiveData<List<Inquilino>> getInquilinos() {
         return tenantLiveData;
     }
 
-    private void fetchInquilinos(Context context) {
-        InmobliariaService service = RetrofitClient.getInmobiliariaService(context);
-        Call<List<Inquilino>> call = service.getTenant();
+    public void fetchInquilinosByPropietarioId(int propietarioId) {
+        InmobliariaService service = RetrofitClient.getInmobiliariaService(getApplication());
+        Call<List<Inquilino>> call = service.getInquilinosByPropietarioId(propietarioId);
         call.enqueue(new Callback<List<Inquilino>>() {
             @Override
             public void onResponse(Call<List<Inquilino>> call, Response<List<Inquilino>> response) {

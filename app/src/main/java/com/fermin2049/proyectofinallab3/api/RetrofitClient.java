@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.fermin2049.proyectofinallab3.models.Contract;
+import com.fermin2049.proyectofinallab3.models.Inmueble;
 import com.fermin2049.proyectofinallab3.models.Inquilino;
 import com.fermin2049.proyectofinallab3.models.LoginResponse;
 import com.fermin2049.proyectofinallab3.models.Pago;
@@ -28,6 +29,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public class RetrofitClient {
     private static final String URL_BASE = "http://192.168.1.2:5157/api/";
@@ -76,20 +78,23 @@ public class RetrofitClient {
         @FormUrlEncoded
         @POST("Propietarios/login")
         Call<LoginResponse> login(@Field("Usuario") String usuario, @Field("Clave") String clave);
-    
+
         @POST("Propietarios")
         Call<Propietario> register(@Body Propietario propietario);
-    
+
         @GET("Propietarios/me")
         Call<Propietario> getMyDetails();
-    
-        @GET("Inquilinos")
-        Call<List<Inquilino>> getTenant();
-    
-        @GET("Contratos")
-        Call<List<Contract>> getContratos();
-    
-        @GET("Pagos")
-        Call<List<Pago>> getPagos();
+
+        @GET("Inquilinos/ByPropietario/{propietarioId}")
+        Call<List<Inquilino>> getInquilinosByPropietarioId(@Path("propietarioId") int propietarioId);
+
+        @GET("Contratos/ByPropietario/{propietarioId}")
+        Call<List<Contract>> getContratosByPropietarioId(@Path("propietarioId") int propietarioId);
+
+        @GET("Pagos/ByPropietario/{propietarioId}")
+        Call<List<Pago>> getPagosByPropietarioId(@Path("propietarioId") int propietarioId);
+
+        @GET("Inmuebles/ByPropietario/{propietarioId}")
+        Call<List<Inmueble>> getInmueblesByPropietarioId(@Path("propietarioId") int propietarioId);
     }
 }

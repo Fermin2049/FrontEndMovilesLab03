@@ -41,9 +41,10 @@ public class TenantFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(TenantViewModel.class);
         mViewModel.getInquilinos().observe(getViewLifecycleOwner(), tenants -> {
-            if (tenants != null) {
-                adapter.setTenants(tenants);
-            }
+            adapter.setTenants(tenants);
         });
+
+        // Obtener los inquilinos por propietario (ejemplo con propietarioId = 1)
+        mViewModel.fetchInquilinosByPropietarioId(1);
     }
 }
