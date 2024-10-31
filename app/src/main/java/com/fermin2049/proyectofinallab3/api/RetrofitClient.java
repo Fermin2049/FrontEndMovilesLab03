@@ -23,6 +23,7 @@ import okhttp3.Response;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -75,16 +76,19 @@ public class RetrofitClient {
         @FormUrlEncoded
         @POST("Propietarios/login")
         Call<LoginResponse> login(@Field("Usuario") String usuario, @Field("Clave") String clave);
-
+    
+        @POST("Propietarios")
+        Call<Propietario> register(@Body Propietario propietario);
+    
         @GET("Propietarios/me")
         Call<Propietario> getMyDetails();
-
+    
         @GET("Inquilinos")
         Call<List<Inquilino>> getTenant();
-
+    
         @GET("Contratos")
         Call<List<Contract>> getContratos();
-
+    
         @GET("Pagos")
         Call<List<Pago>> getPagos();
     }

@@ -2,9 +2,7 @@ package com.fermin2049.proyectofinallab3;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,7 +21,6 @@ public class LoginActivity extends AppCompatActivity {
         lvm = new ViewModelProvider.AndroidViewModelFactory(getApplication())
                 .create(LoginViewModel.class);
 
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().hide();
@@ -39,9 +36,26 @@ public class LoginActivity extends AppCompatActivity {
 
         // Configurar el botón de registro
         binding.btnSignup.setOnClickListener(v -> {
+            String dni = binding.etSignupDNI.getText().toString();
+            String apellido = binding.etSignupApellido.getText().toString();
+            String nombre = binding.etSignupNombre.getText().toString();
+            String telefono = binding.etSignupTelefono.getText().toString();
             String email = binding.etSignupEmail.getText().toString();
             String password = binding.etSignupPassword.getText().toString();
-            // Lógica para manejar el registro (ejemplo: lvm.llamarRegistro(username, email, password))
+            Log.d("LoginActivity", "Attempting registration with email: " + email);
+            lvm.llamarRegistro(dni, apellido, nombre, telefono, email, password);
         });
+
+        // Observar el resultado del registro
+        lvm.limpiarCampos.observe(this, limpiar -> limpiarCamposRegistro());
+    }
+
+    private void limpiarCamposRegistro() {
+        binding.etSignupDNI.setText("");
+        binding.etSignupApellido.setText("");
+        binding.etSignupNombre.setText("");
+        binding.etSignupTelefono.setText("");
+        binding.etSignupEmail.setText("");
+        binding.etSignupPassword.setText("");
     }
 }

@@ -9,18 +9,20 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.MutableLiveData;
 
 import com.fermin2049.proyectofinallab3.api.RetrofitClient;
 import com.fermin2049.proyectofinallab3.models.LoginResponse;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.fermin2049.proyectofinallab3.models.Propietario;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginViewModel extends AndroidViewModel {
+    public MutableLiveData<Boolean> registroExitoso = new MutableLiveData<>();
+    public MutableLiveData<Void> limpiarCampos = new MutableLiveData<>();
+
     public LoginViewModel(@NonNull Application application) {
         super(application);
     }
@@ -51,9 +53,33 @@ public class LoginViewModel extends AndroidViewModel {
         });
     }
 
-    public void llamarRegistro(String username, String email, String password) {
-        // Lógica para registrar al usuario (similar a llamarLogin)
-        // Puedes crear una llamada a tu API de registro aquí
+    public void llamarRegistro(String dni, String apellido, String nombre, String telefono, String email, String password) {
+        RetrofitClient.InmobliariaService api = RetrofitClient.getInmobiliariaService(getApplication());
+        Propietario propietario = new Propietario(0, dni, apellido, nombre, telefono, email, password, null, null);
+        Call<Propietario> call = api.register(propietario);
+        Log.d("LoginViewModel", "Calling API to register with email: " + email);
+        call.enqueue(new Callback<Propietario>() {
+            @Override
+            public void onResponse(@NonNull Call<Propietario> call, @NonNull Response<Propietario> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Log.d("LoginViewModel", "Registration successful: " + response.body().getEmail());
+                    Toast.makeText(getApplication(), "Registro exitoso", Toast.LENGTH_SHORT).show();
+                    registroExitoso.postValue(true);
+                    limpiarCampos.postValue(null); // Notificar para limpiar campos
+                } else {
+                    Log.d("LoginViewModel", "Registration failed: " + response.code() + " - " + response.message());
+                    Toast.makeText(getApplication(), "Error en el registro", Toast.LENGTH_SHORT).show();
+                    registroExitoso.postValue(false);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Propietario> call, @NonNull Throwable throwable) {
+                Log.d("LoginViewModel", "API call failed: " + throwable.getMessage());
+                Toast.makeText(getApplication(), "Error de servidor", Toast.LENGTH_SHORT).show();
+                registroExitoso.postValue(false);
+            }
+        });
     }
 
     private void saveToken(String token) {
