@@ -1,17 +1,19 @@
 package com.fermin2049.proyectofinallab3;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.fermin2049.proyectofinallab3.ui.contract.ContractFragment;
 import com.fermin2049.proyectofinallab3.ui.home.HomeFragment;
-import com.fermin2049.proyectofinallab3.ui.logout.LogoutFragment;
-import com.fermin2049.proyectofinallab3.ui.pay.PayFragment;
 import com.fermin2049.proyectofinallab3.ui.profile.ProfileFragment;
 import com.fermin2049.proyectofinallab3.ui.property.PropertyFragment;
+import com.fermin2049.proyectofinallab3.ui.contract.ContractFragment;
 import com.fermin2049.proyectofinallab3.ui.tenant.TenantFragment;
+import com.fermin2049.proyectofinallab3.ui.pay.PayFragment;
+import com.fermin2049.proyectofinallab3.ui.logout.LogoutFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
@@ -38,7 +40,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
             case 6:
                 return new LogoutFragment();
             default:
-                return new HomeFragment();
+                return new HomeFragment(); // Retorna un fragmento predeterminado si la posición no coincide
         }
     }
 
