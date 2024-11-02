@@ -32,7 +32,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public class RetrofitClient {
-    private static final String URL_BASE = "http://192.168.1.2:5157/api/";
+    private static final String URL_BASE = "http://192.168.144.211:5157/api/";
     private static final String TAG = "RetrofitClient";
     private static Retrofit retrofit = null;
 

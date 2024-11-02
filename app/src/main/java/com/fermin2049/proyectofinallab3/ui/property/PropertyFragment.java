@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.fermin2049.proyectofinallab3.databinding.FragmentPropertyBinding;
 import com.fermin2049.proyectofinallab3.models.InmuebleAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,15 @@ public class PropertyFragment extends Fragment {
 
         // Obtener los inmuebles por propietario (ejemplo con propietarioId = 1)
         propertyViewModel.fetchInmueblesByPropietarioId(1);
+
+        // Configurar el botón flotante
+        FloatingActionButton fabAddInmueble = binding.fabAddInmueble;
+        fabAddInmueble.setOnClickListener(v -> {
+            // Navegar al fragmento de agregar inmueble
+            // Aquí puedes usar Navigation Component o FragmentTransaction
+            // Ejemplo con Navigation Component:
+            // Navigation.findNavController(v).navigate(R.id.action_propertyFragment_to_addInmuebleFragment);
+        });
 
         return root;
     }
