@@ -1,5 +1,6 @@
 package com.fermin2049.proyectofinallab3.ui.property;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +9,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.fermin2049.proyectofinallab3.R;
 import com.fermin2049.proyectofinallab3.databinding.FragmentPropertyBinding;
 import com.fermin2049.proyectofinallab3.models.InmuebleAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -22,6 +26,7 @@ public class PropertyFragment extends Fragment {
     private PropertyViewModel propertyViewModel;
     private InmuebleAdapter inmuebleAdapter;
 
+    @SuppressLint("ResourceType")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         propertyViewModel = new ViewModelProvider(this).get(PropertyViewModel.class);
@@ -46,11 +51,11 @@ public class PropertyFragment extends Fragment {
         // Configurar el botón flotante
         FloatingActionButton fabAddInmueble = binding.fabAddInmueble;
         fabAddInmueble.setOnClickListener(v -> {
-            // Navegar al fragmento de agregar inmueble
-            // Aquí puedes usar Navigation Component o FragmentTransaction
-            // Ejemplo con Navigation Component:
-            // Navigation.findNavController(v).navigate(R.id.action_propertyFragment_to_addInmuebleFragment);
+            NavController navController = NavHostFragment.findNavController(PropertyFragment.this);
+            navController.navigate(R.id.action_nav_property_to_addInmuebleFragment); // Usa la acción definida
         });
+
+
 
         return root;
     }

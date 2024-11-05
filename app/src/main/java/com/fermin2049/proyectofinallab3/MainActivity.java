@@ -1,19 +1,14 @@
 package com.fermin2049.proyectofinallab3;
 
 import android.os.Bundle;
-import android.util.Log;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.appcompat.app.AppCompatActivity;
 import com.fermin2049.proyectofinallab3.databinding.ActivityMainBinding;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private MainViewModel mainViewModel;
+    private MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,18 +19,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // Inicializar ViewModel
-        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
-        // Configurar adaptador en el ViewPager2 y TabLayout
-        binding.viewPager.setAdapter(mainViewModel.getViewPagerAdapter(this));
-        mainViewModel.setupTabIcons(binding.tabLayout, binding.viewPager);
+        // Configurar NavController
+        viewModel.setupNavController(this);
 
-        // Registrar el callback para monitorear los cambios de página en ViewPager2
-        binding.viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                mainViewModel.onPageSelected(position);
-            }
-        });
+        // Configurar el TabLayout con NavController
+        viewModel.setupTabLayout(binding.tabLayout);
     }
 }

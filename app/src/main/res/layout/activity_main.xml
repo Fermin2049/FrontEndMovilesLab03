@@ -9,20 +9,21 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <!-- App Bar Layout -->
-
     <!-- Main Content Frame with Bottom Navigation Tabs -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- ViewPager2 for Page Content -->
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view_pager"
+        <!-- NavHostFragment for Fragment Navigation -->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            app:navGraph="@navigation/mobile_navigation"
+            app:defaultNavHost="true" />
 
         <!-- TabLayout for Navigation Tabs at the Bottom -->
         <com.google.android.material.tabs.TabLayout

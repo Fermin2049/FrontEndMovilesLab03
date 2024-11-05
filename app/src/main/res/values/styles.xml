@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <style name="CircularImageView" parent="">
-            <item name="cornerFamily">rounded</item>
-            <item name="cornerSize">100%</item>
-        </style>
+    <!-- Define el estilo CircularImageView -->
+    <style name="CircularImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">100%</item>
+    </style>
+
+    <!-- Define la cadena de texto de la pestaña home -->
+    <string name="tab_home_description">Home tab</string>
 </resources>

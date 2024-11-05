@@ -1,9 +1,7 @@
-package com.fermin2049.proyectofinallab3;
+package com.fermin2049.proyectofinallab3.login;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -20,6 +18,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         lvm = new ViewModelProvider.AndroidViewModelFactory(getApplication())
                 .create(LoginViewModel.class);
+        lvm.setContext(this); // Set the activity context
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -30,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
         binding.btnLogin.setOnClickListener(v -> {
             String email = binding.etLoginEmail.getText().toString();
             String password = binding.etLoginPassword.getText().toString();
-            Log.d("LoginActivity", "Attempting login with email: " + email);
             lvm.llamarLogin(email, password);
         });
 
@@ -42,12 +40,17 @@ public class LoginActivity extends AppCompatActivity {
             String telefono = binding.etSignupTelefono.getText().toString();
             String email = binding.etSignupEmail.getText().toString();
             String password = binding.etSignupPassword.getText().toString();
-            Log.d("LoginActivity", "Attempting registration with email: " + email);
             lvm.llamarRegistro(dni, apellido, nombre, telefono, email, password);
         });
 
         // Observar el resultado del registro
         lvm.limpiarCampos.observe(this, limpiar -> limpiarCamposRegistro());
+
+        // Abrir RecoverPasswordActivity al hacer clic en "¿Olvidaste tu contraseña?"
+        binding.tvForgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RecoverPasswordActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void limpiarCamposRegistro() {

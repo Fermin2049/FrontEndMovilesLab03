@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/login_background"
     app:layoutDescription="@xml/activity_login_scene"
-    tools:context=".LoginActivity">
+    tools:context=".login.LoginActivity">
 
     <!-- Guideline para ajustar la posición de signupView -->
     <androidx.constraintlayout.widget.Guideline
