@@ -13,6 +13,9 @@ public class Propietario {
     private String fotoPerfil;
     private List<Inmueble> inmuebles;
 
+    public Propietario() {
+    }
+
     public Propietario(int idPropietario, String dni, String apellido, String nombre, String telefono, String email, String password, String fotoPerfil, List<Inmueble> inmuebles) {
         this.idPropietario = idPropietario;
         this.dni = dni;

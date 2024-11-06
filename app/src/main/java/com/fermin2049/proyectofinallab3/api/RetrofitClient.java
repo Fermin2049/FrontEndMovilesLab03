@@ -9,6 +9,7 @@ import com.fermin2049.proyectofinallab3.models.LoginResponse;
 import com.fermin2049.proyectofinallab3.models.Pago;
 import com.fermin2049.proyectofinallab3.models.Propietario;
 import com.fermin2049.proyectofinallab3.models.RestablecerContrasenaRequest;
+import com.fermin2049.proyectofinallab3.models.UpdatePasswordRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -17,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 import okhttp3.Interceptor;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -28,7 +30,10 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public class RetrofitClient {
@@ -101,5 +106,12 @@ public class RetrofitClient {
         @FormUrlEncoded
         @POST("Propietarios/solicitar-restablecimiento")
         Call<ResponseBody> solicitarRestablecimiento(@Field("email") String email);
+
+        @Multipart
+        @PUT("Propietarios/{id}")
+        Call<Propietario> updatePropietarioWithImage(@Path("id") int id, @Part("propietario") Propietario propietario, @Part MultipartBody.Part fotoPerfil);
+
+        @PUT("Propietarios/{id}/update-password")
+        Call<Void> updatePassword(@Path("id") int id, @Body UpdatePasswordRequest request);
     }
 }
