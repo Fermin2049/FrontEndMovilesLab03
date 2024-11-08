@@ -122,6 +122,7 @@ public class RetrofitClient {
                 @Part("nombre") RequestBody nombre,
                 @Part("telefono") RequestBody telefono,
                 @Part("email") RequestBody email,
+                @Part("password") RequestBody password,
                 @Part MultipartBody.Part fotoPerfil
         );
 
