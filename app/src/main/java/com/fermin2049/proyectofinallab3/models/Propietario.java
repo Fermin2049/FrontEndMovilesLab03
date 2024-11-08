@@ -1,5 +1,7 @@
 package com.fermin2049.proyectofinallab3.models;
 
+import android.net.Uri;
+
 import java.util.List;
 
 public class Propietario {
@@ -10,7 +12,8 @@ public class Propietario {
     private String telefono;
     private String email;
     private String password;
-    private String fotoPerfil;
+    private transient Uri fotoPerfilUri; // `transient` para evitar la serialización directa
+    private String fotoPerfil; // Para guardar el `Uri` como String
     private List<Inmueble> inmuebles;
 
     public Propietario() {
@@ -24,6 +27,19 @@ public class Propietario {
         this.telefono = telefono;
         this.email = email;
         this.password = password;
+        this.fotoPerfil = fotoPerfil;
+        this.inmuebles = inmuebles;
+    }
+
+    public Propietario(int idPropietario, String dni, String apellido, String nombre, String telefono, String email, String password, Uri fotoPerfilUri, String fotoPerfil, List<Inmueble> inmuebles) {
+        this.idPropietario = idPropietario;
+        this.dni = dni;
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.email = email;
+        this.password = password;
+        this.fotoPerfilUri = fotoPerfilUri;
         this.fotoPerfil = fotoPerfil;
         this.inmuebles = inmuebles;
     }
@@ -82,6 +98,14 @@ public class Propietario {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Uri getFotoPerfilUri() {
+        return fotoPerfilUri;
+    }
+
+    public void setFotoPerfilUri(Uri fotoPerfilUri) {
+        this.fotoPerfilUri = fotoPerfilUri;
     }
 
     public String getFotoPerfil() {

@@ -21,6 +21,7 @@ import okhttp3.Interceptor;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -40,6 +41,10 @@ public class RetrofitClient {
     private static final String URL_BASE = "http://192.168.1.2:5157/api/";
     private static final String TAG = "RetrofitClient";
     private static Retrofit retrofit = null;
+
+    public static String getBaseUrl() {
+        return URL_BASE;
+    }
 
     public static InmobliariaService getInmobiliariaService(Context context) {
         if (retrofit == null) {
@@ -109,7 +114,30 @@ public class RetrofitClient {
 
         @Multipart
         @PUT("Propietarios/{id}")
-        Call<Propietario> updatePropietarioWithImage(@Path("id") int id, @Part("propietario") Propietario propietario, @Part MultipartBody.Part fotoPerfil);
+        Call<Propietario> updatePropietarioWithImage(
+                @Path("id") int id,
+                @Part("idPropietario") RequestBody idPropietario,
+                @Part("dni") RequestBody dni,
+                @Part("apellido") RequestBody apellido,
+                @Part("nombre") RequestBody nombre,
+                @Part("telefono") RequestBody telefono,
+                @Part("email") RequestBody email,
+                @Part MultipartBody.Part fotoPerfil
+        );
+
+        @Multipart
+        @PUT("Propietarios/{id}")
+        Call<Propietario> updatePropietarioWithImageNoPassword(
+                @Path("id") int id,
+                @Part("dni") RequestBody dni,
+                @Part("apellido") RequestBody apellido,
+                @Part("nombre") RequestBody nombre,
+                @Part("telefono") RequestBody telefono,
+                @Part("email") RequestBody email,
+                @Part MultipartBody.Part fotoPerfil
+        );
+
+
 
         @PUT("Propietarios/{id}/update-password")
         Call<Void> updatePassword(@Path("id") int id, @Body UpdatePasswordRequest request);
