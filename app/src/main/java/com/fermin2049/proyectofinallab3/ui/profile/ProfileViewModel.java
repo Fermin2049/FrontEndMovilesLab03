@@ -59,7 +59,8 @@ public class ProfileViewModel extends AndroidViewModel {
         RequestBody nombre = RequestBody.create(MediaType.parse("text/plain"), propietario.getNombre());
         RequestBody telefono = RequestBody.create(MediaType.parse("text/plain"), propietario.getTelefono());
         RequestBody email = RequestBody.create(MediaType.parse("text/plain"), propietario.getEmail());
-        RequestBody password = RequestBody.create(MediaType.parse("text/plain"), propietario.getPassword());
+        RequestBody currentPassword = RequestBody.create(MediaType.parse("text/plain"), propietario.getCurrentPassword());
+        RequestBody newPassword = RequestBody.create(MediaType.parse("text/plain"), propietario.getPassword());
 
         MultipartBody.Part fotoPerfilPart = null;
         if (fotoUri != null) {
@@ -73,7 +74,7 @@ public class ProfileViewModel extends AndroidViewModel {
         }
 
         Call<Propietario> call = api.updatePropietarioWithImage(
-                propietario.getIdPropietario(), idPropietario, dni, apellido, nombre, telefono, email, password, fotoPerfilPart
+                propietario.getIdPropietario(), idPropietario, dni, apellido, nombre, telefono, email, currentPassword, newPassword, fotoPerfilPart
         );
 
         call.enqueue(new Callback<Propietario>() {

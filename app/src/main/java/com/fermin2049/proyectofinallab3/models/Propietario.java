@@ -15,6 +15,8 @@ public class Propietario {
     private transient Uri fotoPerfilUri; // `transient` para evitar la serialización directa
     private String fotoPerfil; // Para guardar el `Uri` como String
     private List<Inmueble> inmuebles;
+    private transient String currentPassword; // Campo temporal para la contraseña actual
+    private transient String newPassword; // Campo temporal para la nueva contraseña
 
     public Propietario() {
     }
@@ -43,6 +45,8 @@ public class Propietario {
         this.fotoPerfil = fotoPerfil;
         this.inmuebles = inmuebles;
     }
+
+    // Getters y Setters
 
     public int getIdPropietario() {
         return idPropietario;
@@ -122,5 +126,21 @@ public class Propietario {
 
     public void setInmuebles(List<Inmueble> inmuebles) {
         this.inmuebles = inmuebles;
+    }
+
+    public String getCurrentPassword() {
+        return currentPassword;
+    }
+
+    public void setCurrentPassword(String currentPassword) {
+        this.currentPassword = currentPassword;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
     }
 }

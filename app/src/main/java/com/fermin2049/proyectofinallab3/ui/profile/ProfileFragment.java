@@ -66,7 +66,17 @@ public class ProfileFragment extends Fragment {
         propietario.setDni(binding.etDni.getText().toString());
         propietario.setTelefono(binding.etTelefono.getText().toString());
         propietario.setEmail(binding.etEmail.getText().toString());
-        propietario.setPassword(binding.etPasswordNueva.getText().toString());
+
+        String currentPassword = binding.etPasswordActual.getText().toString();
+        String newPassword = binding.etPasswordNueva.getText().toString();
+
+        if (!currentPassword.isEmpty() && !newPassword.isEmpty()) {
+            propietario.setCurrentPassword(currentPassword);
+            propietario.setPassword(newPassword);
+        } else {
+            propietario.setCurrentPassword("");
+            propietario.setPassword("");
+        }
 
         Uri fotoUri = profileViewModel.getUriMutable().getValue();
         profileViewModel.actualizarPropietario(propietario, fotoUri, requireContext());
