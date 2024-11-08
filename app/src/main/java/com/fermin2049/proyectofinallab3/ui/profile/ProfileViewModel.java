@@ -51,6 +51,11 @@ public class ProfileViewModel extends AndroidViewModel {
             return;
         }
 
+        if (propietario.getCurrentPassword().isEmpty() || propietario.getPassword().isEmpty()) {
+            propietario.setCurrentPassword("");
+            propietario.setPassword("");
+        }
+
         RetrofitClient.InmobliariaService api = RetrofitClient.getInmobiliariaService(context);
 
         RequestBody idPropietario = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(propietario.getIdPropietario()));

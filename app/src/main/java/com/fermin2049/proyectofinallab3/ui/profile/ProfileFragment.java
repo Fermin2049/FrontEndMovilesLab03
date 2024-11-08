@@ -70,13 +70,8 @@ public class ProfileFragment extends Fragment {
         String currentPassword = binding.etPasswordActual.getText().toString();
         String newPassword = binding.etPasswordNueva.getText().toString();
 
-        if (!currentPassword.isEmpty() && !newPassword.isEmpty()) {
-            propietario.setCurrentPassword(currentPassword);
-            propietario.setPassword(newPassword);
-        } else {
-            propietario.setCurrentPassword("");
-            propietario.setPassword("");
-        }
+        propietario.setCurrentPassword(currentPassword);
+        propietario.setPassword(newPassword);
 
         Uri fotoUri = profileViewModel.getUriMutable().getValue();
         profileViewModel.actualizarPropietario(propietario, fotoUri, requireContext());
