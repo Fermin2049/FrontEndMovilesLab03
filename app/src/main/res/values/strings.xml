@@ -16,4 +16,5 @@
     <string name="menu_pay">Pagos</string>
     <string name="add_inmueble">New Property</string>
     <string name="property_image">Imagen del Inmovil</string>
+    <string name="inmueble_image">iamgen del inmueble</string>
 </resources>

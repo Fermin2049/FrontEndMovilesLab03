@@ -1,8 +1,9 @@
 package com.fermin2049.proyectofinallab3.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Inmueble {
+public class Inmueble implements Serializable {
     private int idInmueble;
     private String direccion;
     private String uso;

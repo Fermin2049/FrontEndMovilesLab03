@@ -60,7 +60,7 @@ public class MainViewModel extends AndroidViewModel {
     public void setupTabLayout(TabLayout tabLayout) {
         tabLayout.addTab(tabLayout.newTab().setText("Home").setIcon(R.drawable.ic_home).setTag(R.id.nav_home));
         tabLayout.addTab(tabLayout.newTab().setText("Profile").setIcon(R.drawable.ic_profile).setTag(R.id.nav_profile));
-        tabLayout.addTab(tabLayout.newTab().setText("Property").setIcon(R.drawable.ic_property).setTag(R.id.nav_property));
+        tabLayout.addTab(tabLayout.newTab().setText("Property").setIcon(R.drawable.ic_property).setTag(R.id.propertyFragment));
         tabLayout.addTab(tabLayout.newTab().setText("Contract").setIcon(R.drawable.ic_contract).setTag(R.id.nav_contract));
         tabLayout.addTab(tabLayout.newTab().setText("Tenant").setIcon(R.drawable.ic_tenant).setTag(R.id.nav_tenant));
         tabLayout.addTab(tabLayout.newTab().setText("Pay").setIcon(R.drawable.ic_pay).setTag(R.id.nav_pay));

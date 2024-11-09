@@ -15,10 +15,11 @@
         app:iconTint="@null" />
 
     <item
-        android:id="@+id/nav_property"
+        android:id="@+id/propertyFragment"
         android:icon="@drawable/ic_property"
         android:title="@string/menu_property"
         app:iconTint="@null" />
+
 
     <item
         android:id="@+id/nav_contract"

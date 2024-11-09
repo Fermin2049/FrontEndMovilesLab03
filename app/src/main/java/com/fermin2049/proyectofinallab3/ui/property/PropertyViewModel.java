@@ -43,6 +43,7 @@ public class PropertyViewModel extends AndroidViewModel {
             @Override
             public void onResponse(@NonNull Call<List<Inmueble>> call, @NonNull Response<List<Inmueble>> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    Log.d("PropertyViewModel", "Inmuebles fetched: " + response.body().size());
                     inmuebles.postValue(response.body());
                 } else {
                     Log.d("PropertyViewModel", "Error: " + response.code() + " - " + response.message());

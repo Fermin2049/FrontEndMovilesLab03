@@ -32,9 +32,7 @@ public class AddInmuebleFragment extends Fragment {
         binding.buttonAddInmueble.setOnClickListener(v -> addInmueble());
 
         addInmuebleViewModel.getImageUri().observe(getViewLifecycleOwner(), uri -> {
-
-                binding.imageViewInmueble.setImageURI(uri);
-
+            binding.imageViewInmueble.setImageURI(uri);
         });
 
         return root;

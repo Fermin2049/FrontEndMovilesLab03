@@ -38,6 +38,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
@@ -189,6 +190,9 @@ public class RetrofitClient {
                 @Part("idPropietario") RequestBody idPropietario,
                 @Part MultipartBody.Part imagen
             );
+
+        @PATCH("Inmuebles/{id}/estado")
+        Call<Void> updateEstadoInmueble(@Path("id") int id, @Body String nuevoEstado);
 
         @PUT("Propietarios/{id}/update-password")
         Call<Void> updatePassword(@Path("id") int id, @Body UpdatePasswordRequest request);

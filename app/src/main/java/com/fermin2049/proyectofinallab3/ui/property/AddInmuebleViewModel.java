@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.OpenableColumns;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -21,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -47,7 +47,6 @@ public class AddInmuebleViewModel extends AndroidViewModel {
     public void addInmueble(String direccion, String uso, String tipo, int ambientes, double precio, String estado, Context context) {
         int idPropietario = RetrofitClient.getPropietarioIdFromToken(context);
         if (idPropietario == -1) {
-            Log.d("AddInmuebleViewModel", "Error: Invalid propietarioId");
             return;
         }
 
@@ -77,15 +76,24 @@ public class AddInmuebleViewModel extends AndroidViewModel {
             @Override
             public void onResponse(@NonNull Call<Inmueble> call, @NonNull Response<Inmueble> response) {
                 if (response.isSuccessful()) {
-                    Log.d("AddInmuebleViewModel", "Inmueble added successfully");
+                    new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
+                            .setTitleText("Inmueble Creado")
+                            .setContentText("El inmueble ha sido creado exitosamente.")
+                            .show();
                 } else {
-                    Log.d("AddInmuebleViewModel", "Error: " + response.code() + " - " + response.message());
+                    new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Error")
+                            .setContentText("No se pudo crear el inmueble. Error: " + response.code() + " - " + response.message())
+                            .show();
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Inmueble> call, @NonNull Throwable t) {
-                Log.d("AddInmuebleViewModel", "API call failed: " + t.getMessage());
+                new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Error")
+                        .setContentText("No se pudo crear el inmueble. Error: " + t.getMessage())
+                        .show();
             }
         });
     }
@@ -104,7 +112,6 @@ public class AddInmuebleViewModel extends AndroidViewModel {
                     while ((bytesRead = inputStream.read(buffer)) != -1) {
                         outputStream.write(buffer, 0, bytesRead);
                     }
-                    Log.d("AddInmuebleViewModel", "File copied to: " + file.getAbsolutePath());
                     return file.getAbsolutePath();
                 } catch (IOException e) {
                     e.printStackTrace();

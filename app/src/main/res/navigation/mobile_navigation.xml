@@ -18,14 +18,16 @@
         tools:layout="@layout/fragment_profile" />
 
     <fragment
-        android:id="@+id/nav_property"
+        android:id="@+id/propertyFragment"
         android:name="com.fermin2049.proyectofinallab3.ui.property.PropertyFragment"
         android:label="@string/menu_property"
         tools:layout="@layout/fragment_property" >
 
-        <!-- Acción para navegar a addInmuebleFragment desde PropertyFragment -->
         <action
-            android:id="@+id/action_nav_property_to_addInmuebleFragment"
+            android:id="@+id/action_propertyFragment_to_inmuebleDetailFragment"
+            app:destination="@id/inmuebleDetailFragment" />
+        <action
+            android:id="@+id/action_propertyFragment_to_addInmuebleFragment"
             app:destination="@id/addInmuebleFragment" />
     </fragment>
 
@@ -53,7 +55,6 @@
         android:label="@string/menu_logout"
         tools:layout="@layout/fragment_logout" />
 
-    <!-- Define el fragmento addInmuebleFragment -->
     <fragment
         android:id="@+id/addInmuebleFragment"
         android:name="com.fermin2049.proyectofinallab3.ui.property.AddInmuebleFragment"
@@ -61,6 +62,17 @@
         tools:layout="@layout/fragment_add_inmueble" >
         <action
             android:id="@+id/action_addInmuebleFragment_to_nav_property"
-            app:destination="@id/nav_property" />
+            app:destination="@id/propertyFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/inmuebleDetailFragment"
+        android:name="com.fermin2049.proyectofinallab3.ui.property.InmuebleDetailFragment"
+        android:label="fragment_inmueble_detail"
+        tools:layout="@layout/fragment_inmueble_detail" >
+        <action
+            android:id="@+id/action_inmuebleDetailFragment_to_nav_property"
+            app:destination="@id/propertyFragment" />
+    </fragment>
+
 </navigation>
