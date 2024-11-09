@@ -6,16 +6,113 @@
     android:layout_height="match_parent"
     tools:context=".ui.property.AddInmuebleFragment">
 
-    <!-- Aquí puedes agregar los campos necesarios para agregar un inmueble -->
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="147dp"
-        android:layout_marginTop="397dp"
-        android:text="agregar inmuegle"
-        android:textColor="@color/black"
+    <ImageView
+        android:id="@+id/imageViewInmueble"
+        android:layout_width="177dp"
+        android:layout_height="165dp"
+        android:layout_margin="8dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Imagen del inmueble"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonSelectImage"
+        android:layout_width="316dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_button"
+        android:text="Seleccionar Imagen"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewInmueble" />
+
+    <EditText
+        android:id="@+id/editTextDireccion"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_margin="8dp"
+        android:hint="Dirección"
+        android:drawableStart="@drawable/location"
+        android:drawablePadding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/buttonSelectImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextUso"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_margin="8dp"
+        android:hint="Uso"
+        android:drawableStart="@drawable/uso"
+        android:drawablePadding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/editTextDireccion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextTipo"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_margin="8dp"
+        android:hint="Tipo"
+        android:drawableStart="@drawable/uso"
+        android:drawablePadding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/editTextUso"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextAmbientes"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_margin="8dp"
+        android:hint="Ambientes"
+        android:inputType="number"
+        android:drawableStart="@drawable/uso"
+        android:drawablePadding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/editTextTipo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextPrecio"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_margin="8dp"
+        android:hint="Precio"
+        android:inputType="numberDecimal"
+        android:drawableStart="@drawable/cash"
+        android:drawablePadding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/editTextAmbientes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextEstado"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_margin="8dp"
+        android:hint="Estado"
+        android:drawableStart="@drawable/check"
+        android:drawablePadding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/editTextPrecio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonAddInmueble"
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_button"
+        android:text="Agregar Inmueble"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextEstado" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

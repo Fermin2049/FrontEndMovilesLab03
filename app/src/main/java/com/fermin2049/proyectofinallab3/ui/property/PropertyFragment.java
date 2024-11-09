@@ -36,7 +36,7 @@ public class PropertyFragment extends Fragment {
 
         // Configurar el RecyclerView
         binding.recyclerViewInmuebles.setLayoutManager(new LinearLayoutManager(getContext()));
-        inmuebleAdapter = new InmuebleAdapter(new ArrayList<>());
+        inmuebleAdapter = new InmuebleAdapter(new ArrayList<>(), getContext());
         binding.recyclerViewInmuebles.setAdapter(inmuebleAdapter);
 
         // Observar los datos de inmuebles
@@ -45,8 +45,8 @@ public class PropertyFragment extends Fragment {
             inmuebleAdapter.notifyDataSetChanged();
         });
 
-        // Obtener los inmuebles por propietario (ejemplo con propietarioId = 1)
-        propertyViewModel.fetchInmueblesByPropietarioId(1);
+        // Obtener los inmuebles por propietario
+        propertyViewModel.fetchInmueblesByPropietarioId();
 
         // Configurar el botón flotante
         FloatingActionButton fabAddInmueble = binding.fabAddInmueble;
@@ -54,8 +54,6 @@ public class PropertyFragment extends Fragment {
             NavController navController = NavHostFragment.findNavController(PropertyFragment.this);
             navController.navigate(R.id.action_nav_property_to_addInmuebleFragment); // Usa la acción definida
         });
-
-
 
         return root;
     }

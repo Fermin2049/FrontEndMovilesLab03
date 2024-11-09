@@ -2,6 +2,9 @@ package com.fermin2049.proyectofinallab3.api;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Base64;
+import android.util.Log;
+
 import com.fermin2049.proyectofinallab3.models.Contract;
 import com.fermin2049.proyectofinallab3.models.Inmueble;
 import com.fermin2049.proyectofinallab3.models.Inquilino;
@@ -12,6 +15,9 @@ import com.fermin2049.proyectofinallab3.models.RestablecerContrasenaRequest;
 import com.fermin2049.proyectofinallab3.models.UpdatePasswordRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Date;
@@ -78,8 +84,26 @@ public class RetrofitClient {
 
     private static String getToken(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
-        String token = sharedPreferences.getString("jwt_token", "");
-        return token;
+        return sharedPreferences.getString("jwt_token", "");
+    }
+
+    public static int getPropietarioIdFromToken(Context context) {
+        String token = getToken(context);
+        String[] parts = token.split("\\.");
+        if (parts.length == 3) {
+            String payload = new String(Base64.decode(parts[1], Base64.DEFAULT));
+            try {
+                JSONObject jsonObject = new JSONObject(payload);
+                if (jsonObject.has("IdPropietario")) {
+                    return jsonObject.getInt("IdPropietario");
+                } else {
+                    Log.e(TAG, "Token does not contain IdPropietario");
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return -1; // Fallback value if IdPropietario is not found
     }
 
     public interface InmobliariaService {
@@ -152,6 +176,19 @@ public class RetrofitClient {
                 @Part("estado") RequestBody estado,
                 @Part MultipartBody.Part fotoInmueble
         );
+
+        @Multipart
+            @POST("Inmuebles")
+            Call<Inmueble> addInmueble(
+                @Part("direccion") RequestBody direccion,
+                @Part("uso") RequestBody uso,
+                @Part("tipo") RequestBody tipo,
+                @Part("ambientes") RequestBody ambientes,
+                @Part("precio") RequestBody precio,
+                @Part("estado") RequestBody estado,
+                @Part("idPropietario") RequestBody idPropietario,
+                @Part MultipartBody.Part imagen
+            );
 
         @PUT("Propietarios/{id}/update-password")
         Call<Void> updatePassword(@Path("id") int id, @Body UpdatePasswordRequest request);

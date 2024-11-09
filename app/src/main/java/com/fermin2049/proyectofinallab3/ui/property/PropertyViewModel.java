@@ -30,7 +30,13 @@ public class PropertyViewModel extends AndroidViewModel {
         return inmuebles;
     }
 
-    public void fetchInmueblesByPropietarioId(int propietarioId) {
+    public void fetchInmueblesByPropietarioId() {
+        int propietarioId = RetrofitClient.getPropietarioIdFromToken(getApplication());
+        if (propietarioId == -1) {
+            Log.d("PropertyViewModel", "Error: Invalid propietarioId");
+            return;
+        }
+
         RetrofitClient.InmobliariaService api = RetrofitClient.getInmobiliariaService(getApplication());
         Call<List<Inmueble>> call = api.getInmueblesByPropietarioId(propietarioId);
         call.enqueue(new Callback<List<Inmueble>>() {

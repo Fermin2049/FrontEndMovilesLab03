@@ -11,16 +11,33 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.fermin2049.proyectofinallab3.R;
+import com.fermin2049.proyectofinallab3.api.RetrofitClient;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import android.content.Context;
 
 public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.InmuebleViewHolder> {
 
     private List<Inmueble> inmuebles;
     private static final String BASE_URL = "http://192.168.1.2:5157/";
+    private int propietarioId;
 
-    public InmuebleAdapter(List<Inmueble> inmuebles) {
+    public InmuebleAdapter(List<Inmueble> inmuebles, Context context) {
         this.inmuebles = inmuebles;
+        this.propietarioId = RetrofitClient.getPropietarioIdFromToken(context);
+        filterInmueblesByPropietarioId();
+    }
+
+    private void filterInmueblesByPropietarioId() {
+        List<Inmueble> filteredList = new ArrayList<>();
+        for (Inmueble inmueble : inmuebles) {
+            if (inmueble.getIdPropietario() == propietarioId) {
+                filteredList.add(inmueble);
+            }
+        }
+        this.inmuebles = filteredList;
     }
 
     @NonNull
@@ -46,6 +63,7 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
 
     public void setInmuebles(List<Inmueble> inmuebles) {
         this.inmuebles = inmuebles;
+        filterInmueblesByPropietarioId();
         notifyDataSetChanged();
     }
 
