@@ -1,5 +1,4 @@
 package com.fermin2049.proyectofinallab3.ui.profile;
-
 import static android.app.Activity.RESULT_OK;
 
 import android.content.Intent;
@@ -16,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.fermin2049.proyectofinallab3.databinding.FragmentProfileBinding;
+import com.fermin2049.proyectofinallab3.login.RecoverPasswordActivity;
 import com.fermin2049.proyectofinallab3.models.Propietario;
 
 public class ProfileFragment extends Fragment {
@@ -47,16 +47,24 @@ public class ProfileFragment extends Fragment {
 
         profileViewModel.getPropietario().observe(getViewLifecycleOwner(), this::actualizarVistaConPropietario);
         profileViewModel.getUriMutable().observe(getViewLifecycleOwner(), uri -> {
-            if (uri != null) {
+
                 Glide.with(this)
-                     .load(uri)
-                     .into(binding.ivFotoPerfil);
-            }
+                        .load(uri)
+                        .into(binding.ivFotoPerfil);
+            
         });
+        profileViewModel.getNavigateToRecoverPassword().observe(getViewLifecycleOwner(), navigate -> abrirRecoverPasswordActivity());
+
         binding.btnSeleccionarImagen.setOnClickListener(v -> abrirGaleria());
         binding.btnActualizar.setOnClickListener(v -> actualizarPerfil());
+        binding.btnOlvidoContrasena.setOnClickListener(v -> profileViewModel.onForgotPasswordClicked());
 
         profileViewModel.fetchPropietarioDetails(requireContext());
+    }
+
+    private void abrirRecoverPasswordActivity() {
+        Intent intent = new Intent(getActivity(), RecoverPasswordActivity.class);
+        startActivity(intent);
     }
 
     private void actualizarPerfil() {
@@ -86,8 +94,8 @@ public class ProfileFragment extends Fragment {
 
         Uri fotoUri = Uri.parse(propietario.getFotoPerfil());
         Glide.with(this)
-             .load(fotoUri)
-             .into(binding.ivFotoPerfil);
+                .load(fotoUri)
+                .into(binding.ivFotoPerfil);
         profileViewModel.recibirFoto(fotoUri);
     }
 
@@ -97,4 +105,4 @@ public class ProfileFragment extends Fragment {
         intent.setType("image/*");
         arl.launch(intent);
     }
-}
+} 

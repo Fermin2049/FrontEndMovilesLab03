@@ -51,12 +51,13 @@ dependencies {
     implementation(libs.activity)
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    implementation ("com.google.android.material:material:1.6.0")
+    implementation("com.google.android.material:material:1.6.0")
     implementation ("androidx.viewpager2:viewpager2:1.0.0")
     implementation ("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation ("androidx.navigation:navigation-ui-ktx:2.5.3")
     implementation ("androidx.viewpager2:viewpager2:1.0.0")
     implementation ("com.github.f0ris.sweetalert:library:1.5.6")
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

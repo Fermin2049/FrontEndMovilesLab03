@@ -6,6 +6,27 @@
     android:background="@android:color/transparent"
     tools:context=".ui.profile.ProfileFragment">
 
+    <ImageView
+        android:id="@+id/ivFotoPerfil"
+        android:layout_width="177dp"
+        android:layout_height="165dp"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSeleccionarImagen"
+        android:layout_width="316dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_button"
+        android:text="Seleccionar Imagen"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivFotoPerfil" />
+
     <EditText
         android:id="@+id/etNombre"
         android:layout_width="match_parent"
@@ -13,9 +34,9 @@
         android:layout_margin="8dp"
         android:drawableStart="@drawable/fa_icon_dni"
         android:hint="Nombre"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSeleccionarImagen"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/etApellido"
@@ -24,9 +45,9 @@
         android:layout_margin="8dp"
         android:drawableStart="@drawable/fa_icon_dni"
         android:hint="Apellido"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etNombre"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etNombre" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/etDni"
@@ -35,9 +56,9 @@
         android:layout_margin="8dp"
         android:drawableStart="@drawable/fa_icon_dni"
         android:hint="DNI"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etApellido"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etApellido" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/etTelefono"
@@ -46,9 +67,9 @@
         android:layout_margin="8dp"
         android:drawableStart="@drawable/fa_icon_telefono"
         android:hint="Teléfono"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etDni"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etDni" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/etEmail"
@@ -57,9 +78,9 @@
         android:layout_margin="8dp"
         android:drawableStart="@drawable/fa_icon_email"
         android:hint="Correo Electrónico"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etTelefono"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etTelefono" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/etPasswordActual"
@@ -69,9 +90,9 @@
         android:drawableStart="@drawable/fa_icon_password"
         android:hint="Contraseña Actual"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etEmail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etEmail" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/etPasswordNueva"
@@ -81,47 +102,32 @@
         android:drawableStart="@drawable/fa_icon_password"
         android:hint="Nueva Contraseña"
         android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@id/etPasswordActual"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnActualizar"
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_button"
+        android:text="Actualizar"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etPasswordActual" />
+        app:layout_constraintTop_toBottomOf="@id/etPasswordNueva" />
 
-    <Button
-        android:id="@+id/btnActualizar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="Actualizar"
-        app:layout_constraintTop_toBottomOf="@id/etPasswordNueva"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnOlvidoContrasena"
-        android:layout_width="match_parent"
+        android:layout_width="316dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_button"
         android:text="Olvidé mi contraseña"
-        app:layout_constraintTop_toBottomOf="@id/btnActualizar"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageView
-        android:id="@+id/ivFotoPerfil"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_margin="8dp"
-        app:layout_constraintTop_toBottomOf="@id/btnOlvidoContrasena"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/btnSeleccionarImagen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="Seleccionar Imagen"
-        app:layout_constraintTop_toBottomOf="@id/ivFotoPerfil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/btnActualizar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

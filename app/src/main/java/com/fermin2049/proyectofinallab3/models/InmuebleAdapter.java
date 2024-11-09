@@ -17,6 +17,7 @@ import java.util.List;
 public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.InmuebleViewHolder> {
 
     private List<Inmueble> inmuebles;
+    private static final String BASE_URL = "http://192.168.1.2:5157/";
 
     public InmuebleAdapter(List<Inmueble> inmuebles) {
         this.inmuebles = inmuebles;
@@ -34,7 +35,8 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
         Inmueble inmueble = inmuebles.get(position);
         holder.direccion.setText(inmueble.getDireccion());
         holder.precio.setText(String.valueOf(inmueble.getPrecio()));
-        Glide.with(holder.itemView.getContext()).load(inmueble.getImagen()).into(holder.imagen);
+        String imageUrl = BASE_URL + inmueble.getImagen();
+        Glide.with(holder.itemView.getContext()).load(imageUrl).into(holder.imagen);
     }
 
     @Override

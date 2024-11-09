@@ -139,7 +139,19 @@ public class RetrofitClient {
                 @Part MultipartBody.Part fotoPerfil
         );
 
-
+        @Multipart
+        @PUT("Inmuebles/{id}")
+        Call<Inmueble> updateInmuebleWithImage(
+                @Path("id") int id,
+                @Part("idInmueble") RequestBody idInmueble,
+                @Part("direccion") RequestBody direccion,
+                @Part("uso") RequestBody uso,
+                @Part("tipo") RequestBody tipo,
+                @Part("ambientes") RequestBody ambientes,
+                @Part("precio") RequestBody precio,
+                @Part("estado") RequestBody estado,
+                @Part MultipartBody.Part fotoInmueble
+        );
 
         @PUT("Propietarios/{id}/update-password")
         Call<Void> updatePassword(@Path("id") int id, @Body UpdatePasswordRequest request);

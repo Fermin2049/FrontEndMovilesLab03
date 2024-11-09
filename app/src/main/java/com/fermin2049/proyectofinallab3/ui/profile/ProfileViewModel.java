@@ -29,9 +29,18 @@ public class ProfileViewModel extends AndroidViewModel {
 
     private final MutableLiveData<Propietario> propietarioLiveData = new MutableLiveData<>();
     private final MutableLiveData<Uri> uriMutableLiveData = new MutableLiveData<>();
+    private final SingleLiveEvent<Void> navigateToRecoverPassword = new SingleLiveEvent<>();
 
     public ProfileViewModel(@NonNull Application application) {
         super(application);
+    }
+
+    public LiveData<Void> getNavigateToRecoverPassword() {
+        return navigateToRecoverPassword;
+    }
+
+    public void onForgotPasswordClicked() {
+        navigateToRecoverPassword.call();
     }
 
     public LiveData<Propietario> getPropietario() {
@@ -41,6 +50,7 @@ public class ProfileViewModel extends AndroidViewModel {
     public LiveData<Uri> getUriMutable() {
         return uriMutableLiveData;
     }
+
 
     public void actualizarPropietario(Propietario propietario, Uri fotoUri, Context context) {
         if (propietario.getIdPropietario() == 0) {
