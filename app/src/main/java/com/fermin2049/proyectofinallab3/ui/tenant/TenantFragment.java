@@ -13,38 +13,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fermin2049.proyectofinallab3.R;
 import com.fermin2049.proyectofinallab3.models.TenantAdapter;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class TenantFragment extends Fragment {
 
-    private TenantViewModel mViewModel;
+    private TenantViewModel tenantViewModel;
     private RecyclerView recyclerView;
     private TenantAdapter adapter;
 
-    public static TenantFragment newInstance() {
-        return new TenantFragment();
-    }
-
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_tenant, container, false);
         recyclerView = root.findViewById(R.id.recyclerViewInquilinos);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new TenantAdapter();
+        adapter = new TenantAdapter(new ArrayList<>(), getContext());
         recyclerView.setAdapter(adapter);
-        return root;
-    }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(TenantViewModel.class);
-        mViewModel.getInquilinos().observe(getViewLifecycleOwner(), tenants -> {
-            adapter.setTenants(tenants);
+        tenantViewModel = new ViewModelProvider(this).get(TenantViewModel.class);
+        tenantViewModel.getInquilinos().observe(getViewLifecycleOwner(), inquilinos -> {
+            adapter.setInquilinos(inquilinos);
         });
 
-        // Obtener los inquilinos por propietario (ejemplo con propietarioId = 1)
-        mViewModel.fetchInquilinosByPropietarioId(1);
+        // Obtener los inquilinos por propietario
+        tenantViewModel.fetchInquilinosByPropietarioId();
+
+        return root;
     }
 }

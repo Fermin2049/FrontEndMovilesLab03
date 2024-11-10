@@ -14,6 +14,7 @@ public class Contract {
     private double montoAlquiler;
     private List<Object> pagos;
 
+
     public Contract(int idContrato, int idInmueble, Inmueble inmueble, int idInquilino, Inquilino inquilino, String fechaInicio, String fechaFin, double montoAlquiler, List<Object> pagos) {
         this.idContrato = idContrato;
         this.idInmueble = idInmueble;

@@ -11,9 +11,9 @@ public class Inquilino {
     private String dniGarante;
     private String telefono;
     private String email;
-    private List<Object> contratos;
+    private List<Contract> contratos;
 
-    public Inquilino(int idInquilino, String dni, String nombreCompleto, String lugarTrabajo, String nombreGarante, String dniGarante, String telefono, String email, List<Object> contratos) {
+    public Inquilino(int idInquilino, String dni, String nombreCompleto, String lugarTrabajo, String nombreGarante, String dniGarante, String telefono, String email, List<Contract> contratos) {
         this.idInquilino = idInquilino;
         this.dni = dni;
         this.nombreCompleto = nombreCompleto;
@@ -89,11 +89,11 @@ public class Inquilino {
         this.email = email;
     }
 
-    public List<Object> getContratos() {
+    public List<Contract> getContratos() {
         return contratos;
     }
 
-    public void setContratos(List<Object> contratos) {
+    public void setContratos(List<Contract> contratos) {
         this.contratos = contratos;
     }
 }

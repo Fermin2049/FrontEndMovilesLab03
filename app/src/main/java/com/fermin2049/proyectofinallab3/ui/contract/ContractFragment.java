@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fermin2049.proyectofinallab3.R;
 import com.fermin2049.proyectofinallab3.models.ContractAdapter;
 
+import java.util.ArrayList;
+
 public class ContractFragment extends Fragment {
 
     private ContractViewModel contractViewModel;
@@ -26,7 +28,7 @@ public class ContractFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_contract, container, false);
         recyclerView = root.findViewById(R.id.recyclerViewContratos);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new ContractAdapter();
+        adapter = new ContractAdapter(new ArrayList<>(), getContext());
         recyclerView.setAdapter(adapter);
 
         contractViewModel = new ViewModelProvider(this).get(ContractViewModel.class);
@@ -35,7 +37,7 @@ public class ContractFragment extends Fragment {
         });
 
         // Obtener los contratos por propietario (ejemplo con propietarioId = 1)
-        contractViewModel.fetchContratosByPropietarioId(1);
+        contractViewModel.fetchContratosByPropietarioId();
 
         return root;
     }

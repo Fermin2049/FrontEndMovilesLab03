@@ -1,5 +1,6 @@
 package com.fermin2049.proyectofinallab3.models;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,30 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fermin2049.proyectofinallab3.R;
+import com.fermin2049.proyectofinallab3.api.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ContractAdapter extends RecyclerView.Adapter<ContractAdapter.ContractViewHolder> {
-    private List<Contract> contratos = new ArrayList<>();
+    private List<Contract> contratos;
+    private int propietarioId;
+
+    public ContractAdapter(List<Contract> contratos, Context context) {
+        this.contratos = contratos;
+        this.propietarioId = RetrofitClient.getPropietarioIdFromToken(context);
+        filterContratosByPropietarioId();
+    }
+
+    private void filterContratosByPropietarioId() {
+        List<Contract> filteredList = new ArrayList<>();
+        for (Contract contrato : contratos) {
+            if (contrato.getInmueble().getIdPropietario() == propietarioId) {
+                filteredList.add(contrato);
+            }
+        }
+        this.contratos = filteredList;
+    }
 
     @NonNull
     @Override
@@ -40,6 +59,7 @@ public class ContractAdapter extends RecyclerView.Adapter<ContractAdapter.Contra
 
     public void setContratos(List<Contract> contratos) {
         this.contratos = contratos;
+        filterContratosByPropietarioId();
         notifyDataSetChanged();
     }
 

@@ -1,13 +1,12 @@
 package com.fermin2049.proyectofinallab3.ui.contract;
 
 import android.app.Application;
-import android.content.Context;
 import android.util.Log;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.fermin2049.proyectofinallab3.api.RetrofitClient;
-import com.fermin2049.proyectofinallab3.api.RetrofitClient.InmobliariaService;
 import com.fermin2049.proyectofinallab3.models.Contract;
 import java.util.List;
 import retrofit2.Call;
@@ -19,7 +18,7 @@ public class ContractViewModel extends AndroidViewModel {
     private static final String TAG = "ContractViewModel";
     private final MutableLiveData<List<Contract>> contratosLiveData;
 
-    public ContractViewModel(Application application) {
+    public ContractViewModel(@NonNull Application application) {
         super(application);
         contratosLiveData = new MutableLiveData<>();
     }
@@ -28,8 +27,14 @@ public class ContractViewModel extends AndroidViewModel {
         return contratosLiveData;
     }
 
-    public void fetchContratosByPropietarioId(int propietarioId) {
-        InmobliariaService service = RetrofitClient.getInmobiliariaService(getApplication());
+    public void fetchContratosByPropietarioId() {
+        int propietarioId = RetrofitClient.getPropietarioIdFromToken(getApplication());
+        if (propietarioId == -1) {
+            Log.d(TAG, "Error: Invalid propietarioId");
+            return;
+        }
+
+        RetrofitClient.InmobliariaService service = RetrofitClient.getInmobiliariaService(getApplication());
         Call<List<Contract>> call = service.getContratosByPropietarioId(propietarioId);
         call.enqueue(new Callback<List<Contract>>() {
             @Override

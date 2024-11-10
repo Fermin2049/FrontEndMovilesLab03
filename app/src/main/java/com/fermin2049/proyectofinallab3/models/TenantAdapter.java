@@ -1,5 +1,6 @@
 package com.fermin2049.proyectofinallab3.models;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,22 +10,40 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fermin2049.proyectofinallab3.R;
+import com.fermin2049.proyectofinallab3.api.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TenantAdapter extends RecyclerView.Adapter<TenantAdapter.TenantViewHolder> {
-    private List<Inquilino> inquilinos = new ArrayList<>();
+    private List<Inquilino> inquilinos;
+    private int propietarioId;
+
+    public TenantAdapter(List<Inquilino> inquilinos, Context context) {
+        this.inquilinos = inquilinos;
+        this.propietarioId = RetrofitClient.getPropietarioIdFromToken(context);
+        filterInquilinosByPropietarioId();
+    }
+
+    private void filterInquilinosByPropietarioId() {
+        List<Inquilino> filteredList = new ArrayList<>();
+        for (Inquilino inquilino : inquilinos) {
+            if (inquilino.getContratos().stream().anyMatch(contrato -> contrato.getInmueble().getIdPropietario() == propietarioId)) {
+                filteredList.add(inquilino);
+            }
+        }
+        this.inquilinos = filteredList;
+    }
 
     @NonNull
     @Override
-    public TenantAdapter.TenantViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TenantViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_inquilino, parent, false);
         return new TenantViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TenantAdapter.TenantViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TenantViewHolder holder, int position) {
         Inquilino inquilino = inquilinos.get(position);
         holder.tvNombreCompleto.setText(inquilino.getNombreCompleto());
         holder.tvDni.setText(inquilino.getDni());
@@ -37,14 +56,16 @@ public class TenantAdapter extends RecyclerView.Adapter<TenantAdapter.TenantView
         return inquilinos.size();
     }
 
-    public void setTenants(List<Inquilino> inquilinos) {
+    public void setInquilinos(List<Inquilino> inquilinos) {
         this.inquilinos = inquilinos;
+        filterInquilinosByPropietarioId();
         notifyDataSetChanged();
     }
 
-    public class TenantViewHolder extends RecyclerView.ViewHolder {
+    static class TenantViewHolder extends RecyclerView.ViewHolder {
         TextView tvNombreCompleto, tvDni, tvTelefono, tvEmail;
-        public TenantViewHolder(@NonNull View itemView) {
+
+        TenantViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNombreCompleto = itemView.findViewById(R.id.tvNombreCompleto);
             tvDni = itemView.findViewById(R.id.tvDni);
