@@ -1,17 +1,16 @@
 package com.fermin2049.proyectofinallab3.models;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.fermin2049.proyectofinallab3.R;
 import com.fermin2049.proyectofinallab3.api.RetrofitClient;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +48,12 @@ public class TenantAdapter extends RecyclerView.Adapter<TenantAdapter.TenantView
         holder.tvDni.setText(inquilino.getDni());
         holder.tvTelefono.setText(inquilino.getTelefono());
         holder.tvEmail.setText(inquilino.getEmail());
+
+        holder.itemView.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("inquilino", inquilino);
+            Navigation.findNavController(v).navigate(R.id.action_nav_tenant_to_inquilinoDetailFragment3, bundle);
+        });
     }
 
     @Override

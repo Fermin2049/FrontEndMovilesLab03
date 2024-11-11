@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -12,13 +12,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         app:cardElevation="4dp"
-        app:cardCornerRadius="8dp">
+        app:cardCornerRadius="8dp"
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
             <!-- Título Principal -->
             <TextView
@@ -29,75 +29,123 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:layout_marginBottom="8dp" />
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp" />
 
-            <!-- Sección de Detalles -->
+            <!-- Sección de Detalles con Iconos -->
+
+            <!-- Nombre del Inquilino -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
 
-                <!-- Nombre del Inquilino -->
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/fa_icon_dni"
+                android:layout_marginEnd="8dp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Inquilino:"
                     android:textStyle="bold"
                     android:textSize="16sp" />
-                <TextView
-                    android:id="@+id/tvInquilino"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nombre del Inquilino"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="8dp" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tvInquilino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre del Inquilino"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp" />
 
-                <!-- Fecha de Inicio -->
+            <!-- Fecha de Inicio -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/calendar"
+                android:layout_marginEnd="8dp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Fecha de Inicio:"
                     android:textStyle="bold"
                     android:textSize="16sp" />
-                <TextView
-                    android:id="@+id/tvFechaInicio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="01/01/2023"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="8dp" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tvFechaInicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01/01/2023"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp" />
 
-                <!-- Fecha de Fin -->
+            <!-- Fecha de Fin -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/calendar"
+                android:layout_marginEnd="8dp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Fecha de Fin:"
                     android:textStyle="bold"
                     android:textSize="16sp" />
-                <TextView
-                    android:id="@+id/tvFechaFin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="01/01/2024"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="8dp" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tvFechaFin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01/01/2024"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp" />
 
-                <!-- Monto de Alquiler -->
+            <!-- Monto de Alquiler -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/cash"
+                android:layout_marginEnd="8dp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Monto de Alquiler:"
                     android:textStyle="bold"
                     android:textSize="16sp" />
-                <TextView
-                    android:id="@+id/tvMontoAlquiler"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="$5000"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="8dp" />
-
             </LinearLayout>
+            <TextView
+                android:id="@+id/tvMontoAlquiler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$5000"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp" />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

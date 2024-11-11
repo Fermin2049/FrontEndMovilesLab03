@@ -1,8 +1,9 @@
 package com.fermin2049.proyectofinallab3.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Inquilino {
+public class Inquilino implements Serializable {
     private int idInquilino;
     private String dni;
     private String nombreCompleto;

@@ -118,6 +118,9 @@ public class RetrofitClient {
         @GET("Propietarios/me")
         Call<Propietario> getMyDetails();
 
+        @GET("Inquilinos/{id}")
+        Call<Inquilino> getInquilinoById(@Path("id") int id);
+
         @GET("Inquilinos/ByPropietario/{propietarioId}")
         Call<List<Inquilino>> getInquilinosByPropietarioId(@Path("propietarioId") int propietarioId);
 

@@ -41,7 +41,11 @@
         android:id="@+id/nav_tenant"
         android:name="com.fermin2049.proyectofinallab3.ui.tenant.TenantFragment"
         android:label="@string/menu_tenant"
-        tools:layout="@layout/fragment_tenant" />
+        tools:layout="@layout/fragment_tenant" >
+        <action
+            android:id="@+id/action_nav_tenant_to_inquilinoDetailFragment3"
+            app:destination="@id/inquilinoDetailFragment2" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_pay"
@@ -73,6 +77,14 @@
         <action
             android:id="@+id/action_inmuebleDetailFragment_to_nav_property"
             app:destination="@id/propertyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inquilinoDetailFragment2"
+        android:name="com.fermin2049.proyectofinallab3.ui.tenant.InquilinoDetailFragment"
+        android:label="InquilinoDetailFragment" >
+        <action
+            android:id="@+id/action_inquilinoDetailFragment3_to_nav_tenant"
+            app:destination="@id/nav_tenant" />
     </fragment>
 
 </navigation>
