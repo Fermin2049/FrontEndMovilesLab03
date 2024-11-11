@@ -26,20 +26,25 @@ public class InmuebleDetailFragment extends Fragment {
 
         inmuebleDetailViewModel = new ViewModelProvider(this).get(InmuebleDetailViewModel.class);
 
-        if (getArguments() != null) {
-            Inmueble inmueble = (Inmueble) getArguments().getSerializable("inmueble");
-            inmuebleDetailViewModel.fetchInmuebleDetails(inmueble);
-        }
+        // Obtener el inmueble de los argumentos y pasarlo al ViewModel
+        Inmueble inmueble = (Inmueble) getArguments().getSerializable("inmueble");
+        inmuebleDetailViewModel.setInmueble(inmueble);
 
+        // Observa los datos de inmueble
         inmuebleDetailViewModel.getInmuebleLiveData().observe(getViewLifecycleOwner(), this::displayInmuebleDetails);
 
-        binding.switchEstado.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            Inmueble inmueble = inmuebleDetailViewModel.getInmuebleLiveData().getValue();
-            if (inmueble != null) {
-                String nuevoEstado = isChecked ? "Disponible" : "Ocupado";
-                inmuebleDetailViewModel.updateEstadoInmueble(inmueble.getIdInmueble(), nuevoEstado, getContext());
+        // Observa revertSwitchLiveData para revertir el Switch si es necesario
+        inmuebleDetailViewModel.getRevertSwitchLiveData().observe(getViewLifecycleOwner(), revert -> {
+            if (revert) {
+                binding.switchEstado.toggle(); // Revertir el estado del switch
+                inmuebleDetailViewModel.getRevertSwitchLiveData().setValue(false); // Reiniciar el estado
             }
         });
+
+        // Evento de cambio en el Switch
+        binding.switchEstado.setOnCheckedChangeListener((buttonView, isChecked) ->
+                inmuebleDetailViewModel.onEstadoSwitchChanged(isChecked, getContext())
+        );
 
         return root;
     }
