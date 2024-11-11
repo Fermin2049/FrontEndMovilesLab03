@@ -8,14 +8,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
 public class CustomDateTypeAdapter extends TypeAdapter<Date> {
     private final SimpleDateFormat dateFormat;
+    private final SimpleDateFormat displayDateFormat;
 
     public CustomDateTypeAdapter() {
-        dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.forLanguageTag("es-AR"));
-        dateFormat.setTimeZone(TimeZone.getTimeZone("America/Argentina/Buenos_Aires"));
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US);
+        displayDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.forLanguageTag("es-AR"));
     }
 
     @Override
@@ -30,5 +30,9 @@ public class CustomDateTypeAdapter extends TypeAdapter<Date> {
         } catch (ParseException e) {
             throw new IOException(e);
         }
+    }
+
+    public String formatForDisplay(Date date) {
+        return displayDateFormat.format(date);
     }
 }
