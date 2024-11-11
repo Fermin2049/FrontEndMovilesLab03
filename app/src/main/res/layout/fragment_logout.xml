@@ -5,12 +5,4 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
 
-    tools:context=".ui.logout.LogoutFragment">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Logaout"
-        android:textSize="52dp"/>
-
-</FrameLayout>
+    tools:context=".ui.logout.LogoutFragment"/>
