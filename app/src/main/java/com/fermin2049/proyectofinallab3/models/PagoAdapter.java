@@ -1,18 +1,39 @@
 package com.fermin2049.proyectofinallab3.models;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.fermin2049.proyectofinallab3.R;
+import com.fermin2049.proyectofinallab3.api.RetrofitClient;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.PagoViewHolder> {
+    private List<Pago> pagos;
+    private int propietarioId;
 
-    private List<Pago> pagos = new ArrayList<>();
+    public PagoAdapter(List<Pago> pagos, Context context) {
+        this.pagos = pagos;
+        this.propietarioId = RetrofitClient.getPropietarioIdFromToken(context);
+        filterPagosByPropietarioId();
+    }
+
+    private void filterPagosByPropietarioId() {
+        List<Pago> filteredList = new ArrayList<>();
+        for (Pago pago : pagos) {
+            if (pago.getContrato().getInmueble().getIdPropietario() == propietarioId) {
+                filteredList.add(pago);
+            }
+        }
+        this.pagos = filteredList;
+    }
 
     @NonNull
     @Override
@@ -36,6 +57,7 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.PagoViewHolder
 
     public void setPagos(List<Pago> pagos) {
         this.pagos = pagos;
+        filterPagosByPropietarioId();
         notifyDataSetChanged();
     }
 

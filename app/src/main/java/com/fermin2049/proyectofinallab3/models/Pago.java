@@ -1,8 +1,9 @@
 package com.fermin2049.proyectofinallab3.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Pago {
+public class Pago implements Serializable {
     private int idPago;
     private int idContrato;
     private Contract contrato;
