@@ -64,8 +64,10 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
         Glide.with(holder.itemView.getContext()).load(imageUrl).into(holder.imagen);
 
         if ("Disponible".equals(inmueble.getEstado())) {
+            holder.estado.setText("Disponible");
             holder.cardView.setCardBackgroundColor(Color.GREEN);
         } else if ("Ocupado".equals(inmueble.getEstado())) {
+            holder.estado.setText("Ocupado");
             holder.cardView.setCardBackgroundColor(Color.RED);
         }
 
@@ -85,16 +87,17 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
     }
 
     public static class InmuebleViewHolder extends RecyclerView.ViewHolder {
-        TextView direccion, precio;
-        ImageView imagen;
-        CardView cardView;
+    TextView direccion, precio, estado;
+    ImageView imagen;
+    CardView cardView;
 
-        public InmuebleViewHolder(@NonNull View itemView) {
-            super(itemView);
-            direccion = itemView.findViewById(R.id.textViewDireccion);
-            precio = itemView.findViewById(R.id.textViewPrecio);
-            imagen = itemView.findViewById(R.id.imageViewInmueble);
-            cardView = itemView.findViewById(R.id.cardViewInmueble);
-        }
+    public InmuebleViewHolder(@NonNull View itemView) {
+        super(itemView);
+        direccion = itemView.findViewById(R.id.textViewDireccion);
+        precio = itemView.findViewById(R.id.textViewPrecio);
+        imagen = itemView.findViewById(R.id.imageViewInmueble);
+        estado = itemView.findViewById(R.id.textViewEstado);
+        cardView = itemView.findViewById(R.id.cardViewInmueble);
     }
+}
 }
