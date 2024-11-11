@@ -12,17 +12,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fermin2049.proyectofinallab3.R;
 import com.fermin2049.proyectofinallab3.api.RetrofitClient;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.PagoViewHolder> {
     private List<Pago> pagos;
     private int propietarioId;
+    private SimpleDateFormat dateFormat;
 
     public PagoAdapter(List<Pago> pagos, Context context) {
         this.pagos = pagos;
         this.propietarioId = RetrofitClient.getPropietarioIdFromToken(context);
         filterPagosByPropietarioId();
+        dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.forLanguageTag("es-AR"));
     }
 
     private void filterPagosByPropietarioId() {
@@ -46,7 +51,10 @@ public class PagoAdapter extends RecyclerView.Adapter<PagoAdapter.PagoViewHolder
     public void onBindViewHolder(@NonNull PagoViewHolder holder, int position) {
         Pago pago = pagos.get(position);
         holder.tvNumeroPago.setText(String.valueOf(pago.getNumeroPago()));
-        holder.tvFechaPago.setText(pago.getFechaPago().toString());
+
+        Date fechaPago = pago.getFechaPago();
+        holder.tvFechaPago.setText(dateFormat.format(fechaPago));
+
         holder.tvImporte.setText(String.valueOf(pago.getImporte()));
     }
 

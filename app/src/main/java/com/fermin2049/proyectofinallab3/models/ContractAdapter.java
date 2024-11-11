@@ -12,17 +12,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fermin2049.proyectofinallab3.R;
 import com.fermin2049.proyectofinallab3.api.RetrofitClient;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class ContractAdapter extends RecyclerView.Adapter<ContractAdapter.ContractViewHolder> {
     private List<Contract> contratos;
     private int propietarioId;
+    private SimpleDateFormat dateFormat;
 
     public ContractAdapter(List<Contract> contratos, Context context) {
         this.contratos = contratos;
         this.propietarioId = RetrofitClient.getPropietarioIdFromToken(context);
         filterContratosByPropietarioId();
+        dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.forLanguageTag("es-AR"));
     }
 
     private void filterContratosByPropietarioId() {
@@ -47,8 +54,18 @@ public class ContractAdapter extends RecyclerView.Adapter<ContractAdapter.Contra
         Contract contrato = contratos.get(position);
         holder.tvInmueble.setText(contrato.getInmueble().getDireccion());
         holder.tvInquilino.setText(contrato.getInquilino().getNombreCompleto());
-        holder.tvFechaInicio.setText(contrato.getFechaInicio().toString());
-        holder.tvFechaFin.setText(contrato.getFechaFin().toString());
+
+        try {
+            Date fechaInicio = dateFormat.parse(contrato.getFechaInicio());
+            Date fechaFin = dateFormat.parse(contrato.getFechaFin());
+            holder.tvFechaInicio.setText(dateFormat.format(fechaInicio));
+            holder.tvFechaFin.setText(dateFormat.format(fechaFin));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            holder.tvFechaInicio.setText("Invalid date");
+            holder.tvFechaFin.setText("Invalid date");
+        }
+
         holder.tvMontoAlquiler.setText(String.valueOf(contrato.getMontoAlquiler()));
     }
 
