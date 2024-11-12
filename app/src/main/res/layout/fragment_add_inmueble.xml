@@ -91,9 +91,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- EditText y Spinner colocados juntos -->
     <EditText
         android:id="@+id/editTextEstado"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="52dp"
         android:layout_margin="8dp"
         android:hint="Estado"
@@ -101,6 +102,15 @@
         android:drawablePadding="10dp"
         app:layout_constraintTop_toBottomOf="@id/editTextPrecio"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/spinnerEstado" />
+
+    <Spinner
+        android:id="@+id/spinnerEstado"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toTopOf="@id/editTextEstado"
+        app:layout_constraintStart_toEndOf="@id/editTextEstado"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton

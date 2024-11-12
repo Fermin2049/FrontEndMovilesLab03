@@ -7,12 +7,15 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.fermin2049.proyectofinallab3.R;
 import com.fermin2049.proyectofinallab3.databinding.FragmentAddInmuebleBinding;
 
 public class AddInmuebleFragment extends Fragment {
@@ -27,6 +30,16 @@ public class AddInmuebleFragment extends Fragment {
         View root = binding.getRoot();
 
         addInmuebleViewModel = new ViewModelProvider(this).get(AddInmuebleViewModel.class);
+
+        // Configurar el Spinner
+        Spinner spinnerEstado = binding.spinnerEstado;
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.estado_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerEstado.setAdapter(adapter);
+
+        // Set default selection to "Disponible"
+        spinnerEstado.setSelection(adapter.getPosition("Disponible"));
 
         binding.buttonSelectImage.setOnClickListener(v -> openFileChooser());
         binding.buttonAddInmueble.setOnClickListener(v -> addInmueble());
@@ -58,7 +71,7 @@ public class AddInmuebleFragment extends Fragment {
         String tipo = binding.editTextTipo.getText().toString();
         int ambientes = Integer.parseInt(binding.editTextAmbientes.getText().toString());
         double precio = Double.parseDouble(binding.editTextPrecio.getText().toString());
-        String estado = binding.editTextEstado.getText().toString();
+        String estado = binding.spinnerEstado.getSelectedItem().toString();
 
         addInmuebleViewModel.addInmueble(direccion, uso, tipo, ambientes, precio, estado, getContext());
     }

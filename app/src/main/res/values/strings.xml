@@ -17,4 +17,10 @@
     <string name="add_inmueble">New Property</string>
     <string name="property_image">Imagen del Inmovil</string>
     <string name="inmueble_image">iamgen del inmueble</string>
+
+    <string-array name="estado_array">
+        <item>Disponible</item>
+        <item>Ocupado</item>
+    </string-array>
+
 </resources>
